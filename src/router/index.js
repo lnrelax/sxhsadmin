@@ -70,7 +70,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/index'),
         name: 'Index',
-        meta: { title: '首页', icon: 'dashboard', affix: true }
+        meta: { title: '统计分析', icon: 'dashboard', affix: true }
       }
     ]
   },
@@ -239,6 +239,62 @@ export const constantRoutes = [
         component: () => import('@/views/settings'),
         name: 'Settings',
         meta: { title: '系统设置', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+
+  {
+    path: '/profit',
+    component: Layout,
+    redirect: 'profit',
+    children: [
+      {
+        path: '/profit',
+        component: () => import('@/views/profit'),
+        name: 'Profit',
+        meta: { title: '利润统计', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+
+  {
+    path: '/extendTg',
+    component: Layout,
+    redirect: 'extendTg',
+    children: [
+      {
+        path: '/extendTg',
+        component: () => import('@/views/extendTg'),
+        name: 'ExtendTg',
+        meta: { title: '推广管理', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+
+  {
+    path: '/withdrawTg',
+    component: Layout,
+    redirect: 'withdrawTg',
+    children: [
+      {
+        path: '/withdrawTg',
+        component: () => import('@/views/withdrawTg'),
+        name: 'WithdrawTg',
+        meta: { title: '提现记录', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+
+  {
+    path: '/userInfoTg',
+    component: Layout,
+    redirect: 'profit',
+    children: [
+      {
+        path: '/userInfoTg',
+        component: () => import('@/views/userInfoTg'),
+        name: 'UserInfoTg',
+        meta: { title: '个人中心', icon: 'dashboard', affix: true }
       }
     ]
   },

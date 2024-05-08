@@ -57,7 +57,6 @@
             <template slot-scope="scope" >
                 <el-button :disabled="scope.row.enable == 0?false:true" type="success" size="mini" @click="dialog(scope.row.extendId)" >审核</el-button>
                 <el-button :disabled="scope.row.type == 1?false:true" type="primary" size="mini" @click="dialogForm(scope.row)">修改</el-button>
-                <!-- <el-button type="danger" size="mini" @click="dialogFormDel(scope.row)">删除</el-button> -->
             </template>
       </el-table-column>
         
@@ -86,7 +85,7 @@
 
       <el-dialog title="设置分成比例" :visible.sync="dialogFormVisible">
         <el-form :model="form">
-          <el-form-item label="分成比例" :label-width="formLabelWidth">
+          <el-form-item label="分成比例" :label-width="formLabelWidth" :input="inputSet">
             <el-input v-model="form.divideNum" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
@@ -101,7 +100,7 @@
   </template>
   
   <script>
-  import { extendList , examineExtend , extendSet } from '@/api/order'
+  import { extendExtendList , divideSetConfig , divideSet , approve } from '@/api/order'
   
   export default {
     data() {
@@ -112,7 +111,7 @@
         total: 0,
         // 查询参数
         Params: {
-          enable:2
+            status:2
         },
         status:0,
         // 日期范围
@@ -128,6 +127,7 @@
           value: '1',
           label: '审核通过'
         }],
+        divideNum:"",
         statusStr:"",
         extendId:0,
         dialogVisible:false,
@@ -147,7 +147,7 @@
     methods: {
       getList() {
         this.loading = true;
-        extendList(this.Params).then(response => {
+        extendExtendList(this.Params).then(response => {
           this.loading = false
           console.log(response)
           this.orderList = response.data
@@ -157,7 +157,7 @@
       handleSelectChange(value) {
         console.log('选中的值：', value);
         // 在这里执行你需要的方法
-        this.Params.enable = value
+        this.Params.status = value
         this.getList();
       },
       divideNumFormat(row, column) {
@@ -188,29 +188,37 @@
           .catch(_ => {});
       },
       examine(id){
-        examineExtend({extendId:id}).then(response => {
+        approve({extendId:id}).then(response => {
           this.dialogVisible = false
           this.loading = false
-          console.log(response)
           this.getList();
         })
       },
       dialogForm(row){
         this.dialogFormVisible = true
         this.extendId = row.extendId
-        this.form.divideNum = row.divideNum
+        divideSetConfig().then(response => {
+            this.divideNum = response.data.extendDivide
+        })
       },
       examineForm(id){
         const params = {
           extendId : id,
           scale:this.form.divideNum
         }
-        extendSet(params).then(response => {
+        divideSet(params).then(response => {
           this.dialogFormVisible = false
           this.loading = false
           console.log(response)
           this.getList();
         })
+      },
+
+      inputSet(value){
+        console.log("value:", value);
+        if(value > this.divideNum){
+            this.form.divideNum = this.divideNum
+        }
       },
 
     }

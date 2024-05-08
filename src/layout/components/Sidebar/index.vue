@@ -14,61 +14,82 @@
                 :default-active="$route.path"
                 >
 
-                <el-menu-item index="/" align="center">
+                <el-menu-item v-if="userType == 1" index="/" >
                   <i class="el-icon-s-home"></i>
-        <span slot="title">首页</span>
+        <span slot="title">统计分析</span>
       </el-menu-item>
       
-      <el-menu-item index="/order" align="center">
+      <el-menu-item v-if="userType == 1" index="/order" >
         <i class="el-icon-platform-eleme"></i>
         <span slot="title">订单管理</span>
       </el-menu-item>
 
-      <el-menu-item index="/userInfo" align="center">
+      <el-menu-item index="/userInfo" >
         <i class="el-icon-user-solid"></i>
         <span slot="title">用户管理</span>
       </el-menu-item>
 
-      <el-menu-item index="/physiotherapist" align="center">
+      <el-menu-item v-if="userType == 1" index="/physiotherapist" >
         <i class="el-icon-user"></i>
         <span slot="title">理疗师管理</span>
       </el-menu-item>
-      <el-menu-item index="/shop" align="center">
+      <el-menu-item v-if="userType == 1" index="/shop" >
         <i class="el-icon-s-goods"></i>
         <span slot="title">店铺管理</span>
       </el-menu-item>
-      <el-menu-item index="/extend" align="center">
+      <el-menu-item v-if="userType == 1" index="/extend" >
         <i class="el-icon-star-on"></i>
         <span slot="title">推广管理</span>
       </el-menu-item>
-      <el-menu-item index="/item" align="center">
+      <el-menu-item v-if="userType == 1" index="/item" >
         <i class="el-icon-message-solid"></i>
         <span slot="title">服务项目</span>
       </el-menu-item>
-      <el-menu-item index="/favorable" align="center">
+      <el-menu-item v-if="userType == 1" index="/favorable" >
         <i class="el-icon-s-ticket"></i>
         <span slot="title">优惠券</span>
       </el-menu-item>
-      <el-menu-item index="/car" align="center">
+      <el-menu-item v-if="userType == 1" index="/car" >
         <i class="el-icon-truck"></i>
         <span slot="title">车费设置</span>
       </el-menu-item>
-      <el-menu-item index="/image" align="center">
+      <el-menu-item v-if="userType == 1" index="/image" >
         <i class="el-icon-picture"></i>
         <span slot="title">轮播图</span>
       </el-menu-item>
-      <el-menu-item index="/withdraw" align="center">
+      <el-menu-item v-if="userType == 1" index="/withdraw" >
         <i class="el-icon-s-order"></i>
         <span slot="title">提现记录</span>
       </el-menu-item>
-      <el-menu-item index="/feedback" align="center">
+      <el-menu-item v-if="userType == 1" index="/feedback" >
         <i class="el-icon-s-operation"></i>
         <span slot="title">反馈意见</span>
       </el-menu-item>
-      <el-menu-item index="/settings" align="center">
+      <el-menu-item v-if="userType == 1" index="/settings" >
         <i class="el-icon-s-tools"></i>
         <span slot="title">系统管理</span>
       </el-menu-item>
+
+      <el-menu-item v-if="userType == 2" index="/profit" >
+        <i class="el-icon-platform-eleme"></i>
+        <span slot="title">利润统计</span>
+      </el-menu-item>
+
+      <el-menu-item v-if="userType == 2" index="/extendTg" >
+        <i class="el-icon-star-on"></i>
+        <span slot="title">推广管理</span>
+      </el-menu-item>
+
+      <el-menu-item v-if="userType == 2" index="/withdrawTg" >
+        <i class="el-icon-s-order"></i>
+        <span slot="title">提现记录</span>
+      </el-menu-item>
+
+      <el-menu-item v-if="userType == 2" index="/userInfoTg" >
+        <i class="el-icon-user-solid"></i>
+        <span slot="title">个人中心</span>
+      </el-menu-item>
+      
     </el-menu>
         </el-scrollbar>
     </div>
@@ -79,6 +100,7 @@ import { mapGetters, mapState } from "vuex";
 import Logo from "./Logo";
 import SidebarItem from "./SidebarItem";
 import variables from "@/assets/styles/variables.scss";
+import { getUserType } from '@/utils/auth'
 
 export default {
     components: { SidebarItem, Logo },
@@ -106,10 +128,18 @@ export default {
     },
     data() {
         return {
-        onRoutes: this.$route.path, // 当前激活的路由
+          onRoutes: this.$route.path, // 当前激活的路由
+          userType: getUserType(),
         };
     },
+    created() {
+      this.menuListSet();
+    },
     methods: {
+      menuListSet(){
+        console.log("userType:",this.userType)
+
+      },
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
       },

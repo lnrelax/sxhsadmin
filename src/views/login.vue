@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">若依后台管理系统</h3>
+      <h3 class="title">奇缘后台管理系统</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -56,7 +56,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2018-2024 ruoyi.vip All Rights Reserved.</span>
+      <!-- <span>Copyright © 2018-2024 ruoyi.vip All Rights Reserved.</span> -->
     </div>
   </div>
 </template>
@@ -65,6 +65,7 @@
 import { getCodeImg } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from '@/utils/jsencrypt'
+import { getUserType } from '@/utils/auth'
 
 export default {
   name: "Login",
@@ -141,7 +142,13 @@ export default {
             Cookies.remove('rememberMe');
           }
           this.$store.dispatch("Login", this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || "/" }).catch(()=>{});
+            const userType = getUserType();
+            if(userType == 1){
+              this.$router.push({ path: this.redirect || "/" }).catch(()=>{});
+            }else{
+              this.$router.push({ path: this.redirect || "/userInfo" }).catch(()=>{});
+            }
+            
           }).catch(() => {
             this.loading = false;
             if (this.captchaEnabled) {
@@ -161,7 +168,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url("../assets/images/login-background.jpg");
+  background-image: url("../assets/images/login-bg.jpg");
   background-size: cover;
 }
 .title {
@@ -174,6 +181,7 @@ export default {
   border-radius: 6px;
   background: #ffffff;
   width: 400px;
+  margin-left:52%;
   padding: 25px 25px 5px 25px;
   .el-input {
     height: 38px;

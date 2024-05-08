@@ -27,20 +27,21 @@
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img src="https://img1.baidu.com/it/u=1898818648,1968058634&fm=253&fmt=auto&app=138&f=JPEG?w=467&h=500" class="user-avatar">
-          <i class="el-icon-caret-bottom" />
+          <!-- <img src="https://img1.baidu.com/it/u=1898818648,1968058634&fm=253&fmt=auto&app=138&f=JPEG?w=467&h=500" class="user-avatar"> -->
+          <span style="font-size: 13px;" @click="logout">退出登录</span>
+          <!-- <i class="el-icon-caret-bottom" /> -->
         </div>
-        <el-dropdown-menu slot="dropdown">
-          <!-- <router-link to="/user/profile">
+        <!-- <el-dropdown-menu slot="dropdown">
+          <router-link to="/user/profile">
             <el-dropdown-item>个人中心</el-dropdown-item>
           </router-link>
           <el-dropdown-item @click.native="setting = true">
             <span>布局设置</span>
-          </el-dropdown-item> -->
+          </el-dropdown-item>
           <el-dropdown-item divided @click.native="logout">
             <span>退出登录</span>
           </el-dropdown-item>
-        </el-dropdown-menu>
+        </el-dropdown-menu> -->
       </el-dropdown>
     </div>
   </div>
@@ -97,7 +98,7 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      this.$confirm('确定注销并退出系统吗？', '提示', {
+      this.$confirm('确定退出系统吗？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'

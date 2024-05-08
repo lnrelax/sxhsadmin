@@ -1,11 +1,35 @@
 <template>
     <div class="app-container">
-      
-      <el-table v-loading="loading" :data="orderList" height="480">
-        <el-table-column label="用户ID" prop="orderNumber"  align="center"/>
-        <el-table-column label="用户昵称" prop="serviceId" :show-overflow-tooltip="true"  align="center"/>
-        <el-table-column label="注册时间" prop="serviceName" :show-overflow-tooltip="true"  align="center"/>
-        <el-table-column label="最近登录" prop="serviceMoney"  align="center"/>
+      <el-row v-if="userType == 2" :gutter="20">
+        <el-col :span="6">
+          <div>
+            <el-statistic
+              group-separator=","
+              :value="userNum"
+              title="总用户数"
+            >
+            <template slot="prefix">
+              <i class="el-icon-user-solid" style="color: red"></i>
+            </template>
+          </el-statistic>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div>
+            <el-statistic title="今日新增"
+            :value="newUserNum">
+            <template slot="prefix">
+              <i class="el-icon-user-solid" style="color: blue"></i>
+            </template>
+            </el-statistic>
+          </div>
+        </el-col>
+      </el-row>
+      <el-table v-loading="loading" :data="orderList" height="580" :style="userType == 2?'margin-top: 10px;':''">
+        <el-table-column label="用户手机号" prop="phone" :formatter="phoneFormat" align="center"/>
+        <el-table-column label="登录城市" prop="area"  align="center"/>
+        <el-table-column label="注册时间" prop="registerTime"  align="center"/>
+        <el-table-column label="最近登录" prop="lastLoginTime"  align="center"/>
       </el-table>
   
       <pagination
@@ -19,7 +43,9 @@
   </template>
   
   <script>
-  import { getOrderList } from '@/api/order'
+  import { getUserNum , getUserList } from '@/api/order'
+  import Cookies from "js-cookie";
+  import { getUserType } from '@/utils/auth'
   
   export default {
     data() {
@@ -30,16 +56,21 @@
         total: 0,
         // 查询参数
         Params: {
-          orderStatus: 4,
           pageNum: 1,
           pageSize: 10,
-          queryStartDate: "2023-10-01",
-          queryEndDate: "2024-05-01",
         },
+        UserNumParams:{
+          userAccount:Cookies.get("username"),
+          password:Cookies.get("password")
+        },
+        userType:getUserType(),
         status:0,
         // 日期范围
         dateRange: [],
         orderList:[],
+        like: true,
+        userNum: 0,
+        newUserNum: 0,
       };
     },
     created() {
@@ -48,13 +79,31 @@
     methods: {
       getList() {
         this.loading = true;
-        getOrderList(this.Params).then(response => {
+        getUserNum(this.UserNumParams).then(response => {
+          console.log(response)
+          this.userNum = response.data.totalUserNum
+          this.newUserNum = response.data.todayUserNum
+        })
+        getUserList(this.Params).then(response => {
           this.loading = false
           console.log(response)
           this.orderList = response.data.list
           this.total = response.data.total
         })
       },
+      phoneFormat(row, column) {
+        if(row.divideNum == null){
+          return "暂无"
+        }
+      },
     }
   };
   </script>
+
+<style lang="scss">
+.like {
+  cursor: pointer;
+  font-size: 25px;
+  display: inline-block;
+}
+</style>

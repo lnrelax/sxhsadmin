@@ -1,5 +1,5 @@
 import { login } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken , setUserType } from '@/utils/auth'
 
 const user = {
   state: {
@@ -42,6 +42,7 @@ const user = {
       return new Promise((resolve, reject) => {
         login(username, password).then(res => {
           setToken(res.data.token)
+          setUserType(res.data.userType)
           commit('SET_TOKEN', res.data.token)
           resolve()
         }).catch(error => {
