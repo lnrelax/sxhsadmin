@@ -16,7 +16,6 @@
 
             <el-table-column label="操作" width="100" align="center" fixed="right">
                 <template slot-scope="scope" >
-                    <!-- <el-button type="primary" size="mini" @click="favorableEdit(scope.row)">修改</el-button> -->
                     <el-button type="danger" size="mini" @click="favorableDel(scope.row)">删除</el-button>
                 </template>
             </el-table-column>
@@ -36,7 +35,6 @@
 
             <el-table-column label="操作" width="100" align="center" fixed="right">
                 <template slot-scope="scope" >
-                    <!-- <el-button type="primary" size="mini" @click="favorableEdit(scope.row)">修改</el-button> -->
                     <el-button type="danger" size="mini" @click="favorableDel(scope.row)">删除</el-button>
                 </template>
             </el-table-column>
@@ -45,15 +43,6 @@
       
       </el-tabs>
 
-      
-  
-      <!-- <pagination
-        v-show="total>0"
-        :total="total"
-        :page.sync="Params.pageNum"
-        :limit.sync="Params.pageSize"
-        @pagination="getList"
-      /> -->
 
       <el-dialog title="新增优惠券" :visible.sync="dialogFormVisibleAdd">
         <el-form :model="form">
@@ -64,25 +53,7 @@
             <el-input v-model="form.useStandard" autocomplete="off" >
             </el-input>
           </el-form-item>
-          <!-- <el-form-item label="优惠卷类型" :label-width="formLabelWidth" prop="couponType" :rules="[{ required: true, message: '优惠卷类型不能为空'},]">
-            <el-select
-              v-model="statusStr"
-              placeholder="优惠券类型"
-              clearable
-              @change="handleSelectChange"
-              style="width: 100%"
-            >
-            <el-option
-              v-for="dict in options"
-              :key="dict.value"
-              :label="dict.label"
-              :value="dict.value"
-            />
-            </el-select>
-
-          </el-form-item> -->
-
-         
+          
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisibleAdd = false">取 消</el-button>

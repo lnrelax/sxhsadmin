@@ -26,15 +26,7 @@
         <el-table-column label="分成比例" prop="divideNum" :formatter="divideNumFormat" width="100" align="center"/>
         <el-table-column label="联系人" prop="extendConnName" width="160" align="center"/>
         <el-table-column label="联系人电话" prop="extendPhone" width="160" align="center"/>
-        <!-- <el-table-column label="二维码/小程序码"  width="180" align="center">
-          <template slot-scope="scope">
-            <el-image 
-              style="width: 180px; height: 50px"
-              :src="scope.row.qrCode" 
-              :preview-src-list="[scope.row.qrCode]">
-            </el-image>
-          </template>
-        </el-table-column> -->
+       
         <el-table-column label="登录账号" prop="account" width="120" align="center"/>
         <el-table-column label="密码" prop="password" width="100" align="center"/>
         <el-table-column label="审核状态" prop="enable" :formatter="enableFormat" width="120" align="center"/>
@@ -42,35 +34,19 @@
         <el-table-column label="审核时间" prop="approveTime" width="180" align="center"/>
         <el-table-column label="店铺码" prop="shopCode" width="120" align="center"/>
         <el-table-column label="店铺名称" prop="shopName" width="160" align="center"/>
-        <!-- <el-table-column label="营业执照"  width="180" align="center">
-          <template slot-scope="scope">
-            <el-image 
-              style="width: 180px; height: 50px"
-              :src="scope.row.ext1" 
-              :preview-src-list="[scope.row.ext1]">
-            </el-image>
-          </template>
-          
-        </el-table-column> -->
+        
 
         <el-table-column label="操作" width="150" align="center" fixed="right">
             <template slot-scope="scope" >
                 <el-button :disabled="scope.row.enable == 0?false:true" type="success" size="mini" @click="dialog(scope.row.extendId)" >审核</el-button>
                 <el-button :disabled="scope.row.type == 1?false:true" type="primary" size="mini" @click="dialogForm(scope.row)">修改</el-button>
-                <!-- <el-button type="danger" size="mini" @click="dialogFormDel(scope.row)">删除</el-button> -->
+                
             </template>
       </el-table-column>
         
 
       </el-table>
   
-      <!-- <pagination
-        v-show="total>0"
-        :total="total"
-        :page.sync="Params.pageNum"
-        :limit.sync="Params.pageSize"
-        @pagination="getList"
-      /> -->
 
       <el-dialog
         title="提示"

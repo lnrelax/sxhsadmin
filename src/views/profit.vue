@@ -86,14 +86,6 @@
           
         </el-table-column>
       </el-table>
-  
-      <!-- <pagination
-        v-show="total>0"
-        :total="total"
-        :page.sync="Params.pageNum"
-        :limit.sync="Params.pageSize"
-        @pagination="getList"
-      /> -->
 
       <el-dialog title="提现" :visible.sync="dialogFormVisibleAdd">
         <el-form :model="form">
@@ -115,7 +107,6 @@
   
   <script>
   import { profitInfo , profitList , profitTx } from '@/api/order'
-  import Cookies from "js-cookie";
   
   export default {
     data() {

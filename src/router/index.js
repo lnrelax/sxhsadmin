@@ -31,6 +31,11 @@ import Layout from '@/layout'
 // 公共路由
 export const constantRoutes = [
   {
+    path: '/login',
+    component: () => import('@/views/login'),
+    hidden: true
+  },
+  {
     path: '/redirect',
     component: Layout,
     hidden: true,
@@ -40,11 +45,6 @@ export const constantRoutes = [
         component: () => import('@/views/redirect')
       }
     ]
-  },
-  {
-    path: '/login',
-    component: () => import('@/views/login'),
-    hidden: true
   },
   {
     path: '/register',

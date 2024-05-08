@@ -2,100 +2,99 @@
     <div class="app-container">
         <template>
           
-            <el-form label-position="left" label-width="180px" size="mini">
+            <el-form  label-position="left" label-width="180px" size="mini">
               <el-row :gutter="20">
-                
 
                 <el-col :span="span">
                   <el-form-item label="推广团队ID" >
-                        <el-input v-model="userInfo.extendId" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.extendId" readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="团队名称" >
-                        <el-input v-model="userInfo.extendName" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.extendName" readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="团队级别" >
-                        <el-input v-model="userInfo.typeChn" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.typeChn"  readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="联系电话" >
-                        <el-input v-model="userInfo.extendPhone" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.extendPhone" readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="联系地址" >
-                        <el-input v-model="userInfo.address" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.address" readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="联系人" >
-                        <el-input v-model="userInfo.extendConnName" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.extendConnName"  readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="账号" >
-                        <el-input v-model="userInfo.account" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.account" readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="密码" >
-                        <el-input v-model="userInfo.password" class="input" readonly style="width:79%"></el-input>
-                        <el-button type="primary" size="mini" class="button" style="margin-left:10px" @click="editPwd()">修改密码</el-button>
+                        <el-input v-model="userInfo.password"  readonly style="width:79%"></el-input>
+                        <el-button type="primary" size="mini" style="margin-left:10px;" @click="editPwd()">修改密码</el-button>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="分成比例" >
-                        <el-input v-model="userInfo.divideNum" class="input" readonly ></el-input>
+                        <el-input v-model="userInfo.divideNum"  readonly ></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="银行卡" >
-                        <el-input v-model="userInfo.extendCard" class="input" readonly style="width:84%"></el-input>
-                        <el-button type="primary" size="mini" class="button" style="margin-left:10px" @click="editBankCard()">修改</el-button>
+                        <el-input v-model="userInfo.extendCard"  readonly style="width:84%"></el-input>
+                        <el-button type="primary" size="mini"  style="margin-left:10px;" @click="editBankCard()">修改</el-button>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="持卡人姓名" >
-                        <el-input v-model="userInfo.extendCardName" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.extendCardName"  readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="提交申请时间" >
-                        <el-input v-model="userInfo.applyTime" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.applyTime"  readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="审核时间" >
-                        <el-input v-model="userInfo.approveTime" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.approveTime"  readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="店铺码" >
-                        <el-input v-model="userInfo.shopCode" class="input" readonly></el-input>
+                        <el-input v-model="userInfo.shopCode"  readonly></el-input>
                     </el-form-item>
                 </el-col>
 
                 <el-col :span="span">
                   <el-form-item label="余额">
-                    <el-input v-model="form.withdrawMoney" class="input" readonly style="width:79%" ></el-input>
-                    <el-button type="primary" size="mini" class="button" style="margin-left:10px" @click="withdrawInfo()">余额提现</el-button>
+                    <el-input v-model="form.withdrawMoney"  readonly style="width:79%" ></el-input>
+                    <el-button type="primary" size="mini" style="margin-left:10px" @click="withdrawInfo()">余额提现</el-button>
                   </el-form-item>
                 </el-col>
 
@@ -179,7 +178,22 @@
         Params: {
           type: 0,
         },
-        userInfo:{},
+        userInfo:{
+          extendId:"",
+          extendName:"",
+          typeChn:"",
+          extendPhone:"",
+          address:"",
+          extendConnName:"",
+          account:"",
+          password:"",
+          divideNum:"",
+          extendCard:"",
+          extendCardName:"",
+          applyTime:"",
+          approveTime:"",
+          shopCode:"",
+        },
         dialogFormVisibleAdd:false,
         dialogFormVisibleEdit:false,
         dialogFormVisibleTx:false,
@@ -196,7 +210,9 @@
             bankAddress:"",
 
         },
-        form:{},
+        form:{
+          withdrawMoney:"",
+        },
         InfoParams:{
             queryStartDate: "",
             queryEndDate: ""
@@ -206,7 +222,7 @@
       };
     },
     created() {
-      this.setTimes();
+      this.setTimes()
       this.getList()
     },
     methods: {
@@ -223,6 +239,10 @@
         extendInfo().then(response => {
           this.loading = false
           this.userInfo = response.data
+          this.editForm.extendCard = response.data.extendCard
+          this.editForm.extendCardName = response.data.extendCardName
+          this.editForm.bankName = response.data.bankName
+          this.editForm.bankAddress = response.data.bankAddress
         })
         profitInfo(this.InfoParams).then(response => {
           this.form.withdrawMoney = response.data.balance
@@ -235,7 +255,6 @@
         pwdUpdate(this.addForm).then(response => {
             this.dialogFormVisibleAdd = false
             this.getList();
-            this.addForm ={}
         })
       },
       editBankCard(){
@@ -244,8 +263,7 @@
       backCommit(){
         bankCardEdit(this.editForm).then(response => {
             this.dialogFormVisibleEdit = false
-            this.getList();
-            this.editForm ={}
+            this.getList()
         })
       },
       withdrawInfo(){

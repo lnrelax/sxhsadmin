@@ -24,15 +24,6 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="code" v-if="captchaEnabled">
-        <!-- <el-input
-          v-model="loginForm.code"
-          auto-complete="off"
-          placeholder="验证码"
-          style="width: 63%"
-          @keyup.enter.native="handleLogin"
-        >
-          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" /> -->
-        </el-input>
         <div class="login-code">
           <img :src="codeUrl" @click="getCode" class="login-code-img"/>
         </div>
@@ -56,7 +47,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <!-- <span>Copyright © 2018-2024 ruoyi.vip All Rights Reserved.</span> -->
+      
     </div>
   </div>
 </template>

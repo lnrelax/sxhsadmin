@@ -29,14 +29,6 @@
         
 
       </el-table>
-  
-      <!-- <pagination
-        v-show="total>0"
-        :total="total"
-        :page.sync="Params.pageNum"
-        :limit.sync="Params.pageSize"
-        @pagination="getList"
-      /> -->
 
       <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisibleAdd">
         <el-form :model="form">

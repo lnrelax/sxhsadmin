@@ -46,13 +46,6 @@
 
       </el-table>
   
-      <!-- <pagination
-        v-show="total>0"
-        :total="total"
-        :page.sync="Params.pageNum"
-        :limit.sync="Params.pageSize"
-        @pagination="getList"
-      /> -->
     </div>
   </template>
   
