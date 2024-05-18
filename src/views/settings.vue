@@ -30,17 +30,17 @@
                     </el-form-item>
                     <el-form-item label="店铺首单默认分成比例">
                         <el-input v-model="orderOne" class="input"></el-input>
-                        <el-button type="primary" size="mini" class="button" @click="commit(5)">提交</el-button>
+                        <el-button type="primary" size="mini" class="button" @click="commit(6)">提交</el-button>
                     </el-form-item>
 
                     <el-form-item label="店铺加钟打赏默认分成比例">
                         <el-input v-model="orderAdd" class="input"></el-input>
-                        <el-button type="primary" size="mini" class="button" @click="commit(6)">提交</el-button>
+                        <el-button type="primary" size="mini" class="button" @click="commit(7)">提交</el-button>
                     </el-form-item>
 
                     <el-form-item label="推广默认分成比例">
                         <el-input v-model="extend" class="input"></el-input>
-                        <el-button type="primary" size="mini" class="button" @click="commit(7)">提交</el-button>
+                        <el-button type="primary" size="mini" class="button" @click="commit(5)">提交</el-button>
                     </el-form-item>
 
                     <el-form-item label="技师邀请下单首单分成比例">
@@ -127,18 +127,18 @@
                 this.loading = false
                 this.wechat = response.data.context
               })
-            }else if(this.type == 5){
-              textInfo({type:5}).then(response => {
-                this.loading = false
-                this.orderOne = response.data.context
-              })
             }else if(this.type == 6){
               textInfo({type:6}).then(response => {
                 this.loading = false
-                this.orderAdd = response.data.context
+                this.orderOne = response.data.context
               })
             }else if(this.type == 7){
               textInfo({type:7}).then(response => {
+                this.loading = false
+                this.orderAdd = response.data.context
+              })
+            }else if(this.type == 5){
+              textInfo({type:5}).then(response => {
                 this.loading = false
                 this.extend = response.data.context
               })
@@ -162,15 +162,15 @@
               this.loading = false
               this.wechat = response.data.context
             })
-            textInfo({type:5}).then(response => {
+            textInfo({type:6}).then(response => {
               this.loading = false
               this.orderOne = response.data.context
             })
-            textInfo({type:6}).then(response => {
+            textInfo({type:7}).then(response => {
               this.loading = false
               this.orderAdd = response.data.context
             })
-            textInfo({type:7}).then(response => {
+            textInfo({type:5}).then(response => {
               this.loading = false
               this.extend = response.data.context
             })
@@ -200,11 +200,11 @@
           textStr = this.phone
         }else if(type == 4){
           textStr = this.wechat
-        }else if(type == 5){
-          textStr = this.orderOne
         }else if(type == 6){
-          textStr = this.orderAdd
+          textStr = this.orderOne
         }else if(type == 7){
+          textStr = this.orderAdd
+        }else if(type == 5){
           textStr = this.extend
         }else if(type == 8){
           textStr = this.oneOrder

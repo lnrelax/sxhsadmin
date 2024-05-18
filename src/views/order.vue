@@ -49,6 +49,7 @@
         <el-table-column label="用户手机号" prop="userPhone" width="120" align="center"/>
         <el-table-column label="下单地址" prop="address" width="150" align="center"/>
         <el-table-column label="客户订单状态" prop="orderStatus" width="120" align="center"/>
+        <el-table-column label="理疗师姓名" prop="artificerName" width="120" align="center"/>
         <el-table-column label="理疗师订单状态" prop="artificerStatus" width="120" align="center"/>
         <el-table-column label="客户预约时间" prop="appointTime" width="160" align="center"/>
         <el-table-column label="订单时间" prop="orderTime" width="160" align="center"/>
@@ -57,6 +58,7 @@
         <el-table-column label="打车费" prop="taxiMoney" width="80" align="center"/>
         <el-table-column label="优惠券" prop="couponMoney" width="80" align="center"/>
         <el-table-column label="理疗师利润" prop="artificerMoney" width="120" align="center"/>
+        <el-table-column label="理疗师邀请利润" prop="inviteMoney" width="120" align="center"/>
         <el-table-column label="店铺利润" prop="agentMoney" width="80" align="center"/>
         <el-table-column label="平台利润" prop="orderProfit" width="80" align="center"/>
         <el-table-column label="推广利润" prop="extendMoney" width="80" align="center"/>
@@ -70,14 +72,14 @@
           </template>
           
         </el-table-column>
-        <el-table-column label="理疗师姓名" prop="artificerName" width="120" align="center"/>
         
-        <el-table-column label="订单是否可修改" width="120" align="center">
+        
+        <!-- <el-table-column label="订单是否可修改" width="120" align="center">
           <template slot-scope="scope">
             {{scope.row.canEdit== true?"是":"否"}}
           </template>
           
-        </el-table-column>
+        </el-table-column> -->
 
       </el-table>
   
