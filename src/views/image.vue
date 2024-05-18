@@ -110,24 +110,27 @@
         this.dialogFormVisibleAdd = true
       },
       imageSuccess(res, file) {
-        this.form.serviceImage = URL.createObjectURL(file.raw);
+        // console.log(res);
+        // this.form.serviceImage = URL.createObjectURL(file.raw);
+        this.form.serviceImage = res;
       },
       imageUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        // const isJPG = file.type === 'image/jpeg';
+        // const isLt2M = file.size / 1024 / 1024 < 2;
 
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
+        // if (!isJPG) {
+        //   this.$message.error('上传图片只能是 JPG 格式!');
+        // }
+        // if (!isLt2M) {
+        //   this.$message.error('上传图片大小不能超过 2MB!');
+        // }
+        // return isJPG && isLt2M;
       },
 
       imageAddCommit(){
         bannerAdd({bannerImage:this.form.serviceImage}).then(response => {
           this.dialogFormVisibleAdd = false
+          this.form.serviceImage = ""
           this.getList();
         })
       },

@@ -148,8 +148,10 @@ export function itemList() {
 export function itemServiceEdit(data) {
   return request({
     url: '/admin/serviceEdit',
+    ContentType:"form-data",
     headers: {
       DtdToken: getToken(),
+      ContentType:"form-data",
     },
     method: 'post',
     data: data

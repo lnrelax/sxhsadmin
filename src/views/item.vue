@@ -149,35 +149,35 @@
       },
 
       imageSuccess(res, file) {
-        this.form.serviceImage = URL.createObjectURL(file.raw);
+        this.form.serviceImage = res;
       },
       imageInfoSuccess(res, file) {
-        this.form.serviceImageDetail = URL.createObjectURL(file.raw);
+        this.form.serviceImageDetail = res;
       },
 
       imageUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        // const isJPG = file.type === 'image/jpeg';
+        // const isLt2M = file.size / 1024 / 1024 < 2;
 
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
+        // if (!isJPG) {
+        //   this.$message.error('上传头像图片只能是 JPG 格式!');
+        // }
+        // if (!isLt2M) {
+        //   this.$message.error('上传头像图片大小不能超过 2MB!');
+        // }
+        // return isJPG && isLt2M;
       },
       imageInfoUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        // const isJPG = file.type === 'image/jpeg';
+        // const isLt2M = file.size / 1024 / 1024 < 2;
 
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
+        // if (!isJPG) {
+        //   this.$message.error('上传头像图片只能是 JPG 格式!');
+        // }
+        // if (!isLt2M) {
+        //   this.$message.error('上传头像图片大小不能超过 2MB!');
+        // }
+        // return isJPG && isLt2M;
       },
       itemAdd(){
         this.dialogTitle = '新增服务项目'
@@ -197,7 +197,7 @@
         let param = new FormData();
         param.append('type', this.form.type);
         param.append('serviceName', this.form.serviceName);
-        param.append('serviceMoney', this.form.serviceMoney);
+        param.append('serviceMoney', parseFloat(this.form.serviceMoney));
         param.append('serviceTime', this.form.serviceTime);
         param.append('selected', this.form.selected);
         param.append('serviceDetail', this.form.serviceDetail);
@@ -211,6 +211,16 @@
           console.log(response)
           this.dialogFormVisibleAdd = false
           this.dialogVisible = false
+          this.form = {
+            type:1,
+            serviceName: '',
+            serviceMoney:'',
+            serviceTime:'',
+            selected:'',
+            serviceDetail:'',
+            serviceImage: '',
+            serviceImageDetail: '',
+          }
           this.getList()
         })
       },
@@ -225,7 +235,7 @@
           selected: row.selected,
           serviceDetail: row.serviceDetail,
           serviceImage: row.serviceImage,
-          serviceImageDetail: row.serviceImageDetail,
+          serviceImageDetail: row.ext1,
           serviceId: row.serviceId
         }
       },
@@ -238,7 +248,7 @@
           selected: row.selected,
           serviceDetail: row.serviceDetail,
           serviceImage: row.serviceImage,
-          serviceImageDetail: row.serviceImageDetail,
+          serviceImageDetail: row.ext1,
           serviceId: row.serviceId
         }
         this.dialogVisible = true

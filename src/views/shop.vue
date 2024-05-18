@@ -20,8 +20,8 @@
       </el-form>
   
       <el-table v-loading="loading" :data="orderList" height="580">
-        <el-table-column label="ID" prop="agentId" width="80" align="center" fixed/>
-        <el-table-column label="店铺名称" prop="userName"  width="120" align="center" fixed/>
+        <el-table-column label="ID" prop="agentId" width="80" align="center"/>
+        <el-table-column label="店铺名称" prop="userName"  width="120" align="center"/>
         <el-table-column label="店铺码" prop="inviteCode" width="150" align="center"/>
         <el-table-column label="电话" prop="phone" width="120" align="center"/>
         <el-table-column label="首单分成比例" prop="firstDivide" :formatter="firstDivideFormat" width="160" align="center"/>
@@ -61,7 +61,7 @@
         <span>是否确认删除</span>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisibleDel = false">取 消</el-button>
-          <el-button type="primary" @click="examineDel(artificerId)">确 定</el-button>
+          <el-button type="primary" @click="examineDel(agentId)">确 定</el-button>
         </span>
       </el-dialog>
 
@@ -221,7 +221,8 @@
       },
       examineDel(id){
         this.loading = true
-        agentDeleted({agentId:id}).then(response => {
+        console.log(id)
+        agentDeleted(id).then(response => {
           this.dialogVisibleDel = false
           this.loading = false
           this.getList();

@@ -46,6 +46,7 @@ const user = {
           commit('SET_TOKEN', res.data.token)
           resolve()
         }).catch(error => {
+
           reject(error)
         })
       })

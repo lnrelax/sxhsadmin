@@ -152,7 +152,7 @@ export default {
       } else {
         this.number--;
         this.$modal.closeLoading();
-        this.$modal.msgError(res.msg);
+        this.$modal.msgError(res.message);
         this.$refs.fileUpload.handleRemove(file);
         this.uploadedSuccessfully();
       }

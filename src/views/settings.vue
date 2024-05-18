@@ -7,6 +7,11 @@
                     <el-button type="primary" size="mini" class="button" @click="commit(1)">提交</el-button>
                 </el-tab-pane>
 
+                <el-tab-pane label="隐私协议" name="ys">
+                    <editor v-model="ysStr" :min-height="480"/>
+                    <el-button type="primary" size="mini" class="button" @click="commit(0)">提交</el-button>
+                </el-tab-pane>
+
                 <el-tab-pane label="下单须知" name="second">
                     <editor v-model="orderInstructions" :min-height="480"/>
                     <el-button type="primary" size="mini" class="button" @click="commit(2)">提交</el-button>
@@ -23,19 +28,29 @@
                         <el-input v-model="wechat" class="input"></el-input>
                         <el-button type="primary" size="mini" class="button" @click="commit(4)">提交</el-button>
                     </el-form-item>
-                    <el-form-item label="店铺首单分成比例">
+                    <el-form-item label="店铺首单默认分成比例">
                         <el-input v-model="orderOne" class="input"></el-input>
                         <el-button type="primary" size="mini" class="button" @click="commit(5)">提交</el-button>
                     </el-form-item>
 
-                    <el-form-item label="店铺加钟打赏分成比例">
+                    <el-form-item label="店铺加钟打赏默认分成比例">
                         <el-input v-model="orderAdd" class="input"></el-input>
                         <el-button type="primary" size="mini" class="button" @click="commit(6)">提交</el-button>
                     </el-form-item>
 
-                    <el-form-item label="推广分成比例">
+                    <el-form-item label="推广默认分成比例">
                         <el-input v-model="extend" class="input"></el-input>
                         <el-button type="primary" size="mini" class="button" @click="commit(7)">提交</el-button>
+                    </el-form-item>
+
+                    <el-form-item label="技师邀请下单首单分成比例">
+                        <el-input v-model="oneOrder" class="input"></el-input>
+                        <el-button type="primary" size="mini" class="button" @click="commit(8)">提交</el-button>
+                    </el-form-item>
+
+                    <el-form-item label="技师邀请下单加钟分成比例">
+                        <el-input v-model="addOrder" class="input"></el-input>
+                        <el-button type="primary" size="mini" class="button" @click="commit(9)">提交</el-button>
                     </el-form-item>
                     </el-form>
                     
@@ -60,6 +75,9 @@
         extend:"",
         userAgreement:"",
         orderInstructions:"",
+        ysStr:"",
+        oneOrder:"",
+        addOrder:"",
         activeName: 'first',
         // 遮罩层
         loading: true,
@@ -73,7 +91,7 @@
         // 日期范围
         dateRange: [],
         orderList:[],
-        type: 0,
+        type: -1,
       };
     },
     created() {
@@ -92,8 +110,13 @@
             this.loading = false
             this.orderInstructions = response.data.context
           })
+        }else if(this.activeName == "ys"){
+          textInfo({type:0}).then(response => {
+            this.loading = false
+            this.ysStr = response.data.context
+          })
         }else if(this.activeName == "third"){
-          if(this.type!=0){
+          if(this.type!=-1){
             if(this.type == 3){
               textInfo({type:3}).then(response => {
                 this.loading = false
@@ -119,6 +142,16 @@
                 this.loading = false
                 this.extend = response.data.context
               })
+            }else if(this.type == 8){
+              textInfo({type:8}).then(response => {
+                this.loading = false
+                this.oneOrder = response.data.context
+              })
+            }else if(this.type == 9){
+              textInfo({type:9}).then(response => {
+                this.loading = false
+                this.addOrder = response.data.context
+              })
             }
           }else{
             textInfo({type:3}).then(response => {
@@ -140,6 +173,14 @@
             textInfo({type:7}).then(response => {
               this.loading = false
               this.extend = response.data.context
+            })
+            textInfo({type:8}).then(response => {
+              this.loading = false
+              this.oneOrder = response.data.context
+            })
+            textInfo({type:9}).then(response => {
+              this.loading = false
+              this.addOrder = response.data.context
             })
           }
         }
@@ -165,6 +206,12 @@
           textStr = this.orderAdd
         }else if(type == 7){
           textStr = this.extend
+        }else if(type == 8){
+          textStr = this.oneOrder
+        }else if(type == 9){
+          textStr = this.addOrder
+        }else if(type == 0){
+          textStr = this.ysStr
         }
         const params = {
           type:type,

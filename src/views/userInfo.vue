@@ -92,9 +92,13 @@
         })
       },
       phoneFormat(row, column) {
-        if(row.divideNum == null){
+        console.log(row)
+        if(row.phone == null || row.phone == ''){
           return "暂无"
+        }else{
+          return row.phone
         }
+        
       },
     }
   };

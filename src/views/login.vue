@@ -90,7 +90,7 @@ export default {
   watch: {
     $route: {
       handler: function(route) {
-        this.redirect = route.query && route.query.redirect;
+        // this.redirect = route.query && route.query.redirect;
       },
       immediate: true
     }
@@ -135,9 +135,9 @@ export default {
           this.$store.dispatch("Login", this.loginForm).then(() => {
             const userType = getUserType();
             if(userType == 1){
-              this.$router.push({ path: this.redirect || "/" }).catch(()=>{});
+              this.$router.push({ path: "/" || "/" }).catch((err)=>{console.log(err)});
             }else{
-              this.$router.push({ path: this.redirect || "/userInfo" }).catch(()=>{});
+              this.$router.push({ path: '/userInfo' || "/userInfo" }).catch((err)=>{console.log(err)});
             }
             
           }).catch(() => {

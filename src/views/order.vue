@@ -42,8 +42,8 @@
       </el-form>
   
       <el-table v-loading="loading" :data="orderList" height="580">
-        <el-table-column label="订单编号" prop="orderNumber" width="180" align="center" fixed/>
-        <el-table-column label="推广ID" prop="serviceId" :show-overflow-tooltip="true" width="120" align="center"/>
+        <el-table-column label="订单编号" prop="orderNumber" width="180" align="center"/>
+        <el-table-column label="推广名称" prop="extendName" :show-overflow-tooltip="true" width="120" align="center"/>
         <el-table-column label="项目名称" prop="serviceName" :show-overflow-tooltip="true" width="150" align="center"/>
         <el-table-column label="项目金额" prop="serviceMoney" width="100" align="center"/>
         <el-table-column label="客户预约时间" prop="appointTime" width="160" align="center"/>
@@ -100,18 +100,21 @@
         total: 0,
         // 查询参数
         Params: {
-          orderStatus: 4,
+          orderStatus: 0,
           pageNum: 1,
           pageSize: 10,
           queryStartDate: "",
           queryEndDate: "",
         },
         status:0,
-        statusStr:"",
+        statusStr:"全部",
         // 日期范围
         dateRange: [],
         orderList:[],
         options: [{
+          value: '0',
+          label: '全部'
+        },{
           value: '1',
           label: '待支付'
         }, {

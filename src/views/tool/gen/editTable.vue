@@ -194,7 +194,7 @@ export default {
             parentMenuId: genTable.parentMenuId
           };
           updateGenTable(genTable).then(res => {
-            this.$modal.msgSuccess(res.msg);
+            this.$modal.msgSuccess(res.message);
             if (res.code === 200) {
               this.close();
             }

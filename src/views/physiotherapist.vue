@@ -21,7 +21,7 @@
       </el-form>
   
       <el-table v-loading="loading" :data="orderList" height="580">
-        <el-table-column label="姓名" prop="userName" width="180" align="center" fixed/>
+        <el-table-column label="姓名" prop="userName" width="180" align="center" />
         <el-table-column label="昵称" prop="nickName"  width="120" align="center"/>
         <el-table-column label="性别" prop="userSex" :formatter="userSexFormat" width="150" align="center"/>
         <el-table-column label="年龄" prop="userAge" width="100" align="center"/>
@@ -36,7 +36,7 @@
         <el-table-column label="店铺ID" prop="agentId" width="80" align="center"/>
         <el-table-column label="身份证"  width="180" align="center">
           <template slot-scope="scope">
-            <el-image 
+            <el-image v-if="scope.row.userIdCard!=''"
               style="width: 180px; height: 50px"
               :src="scope.row.userIdCard" 
               :preview-src-list="[scope.row.userIdCard]">
@@ -47,7 +47,7 @@
 
         <el-table-column label="健康证"  width="180" align="center">
           <template slot-scope="scope">
-            <el-image 
+            <el-image  v-if="scope.row.healthCertificate!=''"
               style="width: 180px; height: 50px"
               :src="scope.row.healthCertificate" 
               :preview-src-list="[scope.row.healthCertificate]">
@@ -58,7 +58,7 @@
 
         <el-table-column label="按摩证"  width="180" align="center">
           <template slot-scope="scope">
-            <el-image 
+            <el-image v-if="scope.row.massageCertificate!=''"
               style="width: 180px; height: 50px"
               :src="scope.row.massageCertificate" 
               :preview-src-list="[scope.row.massageCertificate]">
@@ -126,9 +126,9 @@
         Params: {
           pageNum:1,
           pageSize:10,
-          status: 0 //0：未审核通过  1：审核通过  2:全部
+          status: 1 //0：未审核通过  1：审核通过  2:全部
         },
-        statusStr:"",
+        statusStr:"审核通过",
         // 日期范围
         dateRange: [],
         orderList:[],
@@ -186,6 +186,7 @@
       examine(id){
         examinePhysiotherap({artificerId:id}).then(response => {
           this.loading = false
+          this.dialogVisible = false
           console.log(response)
           this.getList();
         })
@@ -214,8 +215,9 @@
       },
       examineDel(id){
         this.loading = true
-        massageDelete({artificerId:id}).then(response => {
+        massageDelete(id).then(response => {
           this.loading = false
+          this.dialogVisibleDel = false
           this.getList();
         })
       },
