@@ -15,8 +15,23 @@
             :end-placeholder="InfoParams.queryEndDate"
           ></el-date-picker>
         </el-form-item>
-        <el-form-item>
+        <el-form-item label="订单状态">
             <!-- <el-button type="primary" size="mini" @click="profitT()">提现</el-button> -->
+            <el-select
+            v-model="statusStr"
+            placeholder="订单状态"
+            clearable
+            @change="handleSelectChange"
+            style="width: 240px"
+          >
+          <el-option
+            v-for="dict in options"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+
+          </el-select>
         </el-form-item>
       </el-form>
 
@@ -34,7 +49,7 @@
           </el-statistic>
           </div>
         </el-col>
-        <el-col :span="6">
+        <!-- <el-col :span="6">
           <div>
             <el-statistic
             group-separator=","
@@ -47,7 +62,7 @@
             </template>
           </el-statistic>
           </div>
-        </el-col>
+        </el-col> -->
 
         <el-col :span="6">
           <div>
@@ -66,15 +81,16 @@
       </el-row>
 
       <el-table v-loading="loading" :data="orderList" height="580" style="margin-top: 10px;">
-        <el-table-column label="序号" prop="detailId"  align="center"/>
-        <el-table-column label="推广利润(￥)" prop="extendProfit"  align="center"/>
-        <el-table-column label="订单状态" prop="orderStatus" align="center"/>
-        <el-table-column label="用户ID" prop="userId"  align="center"/>
-        <el-table-column label="技师昵称" prop="artificerName"  align="center"/>
-        <el-table-column label="技师ID" prop="artificerId"  align="center"/>
-        <el-table-column label="订单时间" prop="orderTime"  align="center"/>
-        <el-table-column label="服务名称" prop="serviceName"  align="center"/>
-        <el-table-column label="服务金额(￥)" prop="serviceMoeny"  align="center"/>
+        <el-table-column label="订单号" prop="orderId" width="180"  align="center"/>
+        <el-table-column label="用户手机号" prop="userPhone" width="120" align="center"/>
+        <el-table-column label="下单地址" prop="address" width="400" align="center"/>
+        <el-table-column label="订单状态" prop="orderStatus"  align="center"/>
+        <el-table-column label="预约时间" prop="appointTime" width="180" align="center"/>
+        <el-table-column label="服务项目" prop="serviceName"  align="center"/>
+        <el-table-column label="项目金额" prop="serviceMoney"  align="center"/>
+        <el-table-column label="推广利润" prop="extendProfit"  align="center"/>
+        <el-table-column label="打车费" prop="taxiMoney"  align="center"/>
+        <el-table-column label="创建时间" prop="createTime" width="180" align="center"/>
         <el-table-column label="服务图片"  width="180" align="center">
           <template slot-scope="scope">
             <el-image 
@@ -86,6 +102,14 @@
           
         </el-table-column>
       </el-table>
+
+      <pagination
+        v-show="total>0"
+        :total="total"
+        :page.sync="InfoParams.pageNum"
+        :limit.sync="InfoParams.pageSize"
+        @pagination="getList"
+      />
 
       <el-dialog title="提现" :visible.sync="dialogFormVisibleAdd">
         <el-form :model="form">
@@ -117,8 +141,11 @@
         total: 0,
         // 查询参数
         InfoParams:{
-            queryStartDate: "",
-            queryEndDate: ""
+          orderStatus:0,
+          pageNum:1,
+          pageSize:10,
+          queryStartDate: "",
+          queryEndDate: ""
         },
         form:{
             withdrawMoney:"",
@@ -134,6 +161,26 @@
         moneyLy:0,
         dialogFormVisibleAdd:false,
         formLabelWidth: '120px',
+        statusStr:"全部",
+        options: [{
+          value: '0',
+          label: '全部'
+        }, {
+          value: '1',
+          label: '待支付'
+        }, {
+          value: '2',
+          label: '待服务'
+        }, {
+          value: '3',
+          label: '服务中'
+        }, {
+          value: '4已完成',
+          label: '待支付'
+        }, {
+          value: '6',
+          label: '退款完成'
+        }],
 
       };
     },
@@ -142,6 +189,12 @@
       this.getList()
     },
     methods: {
+      handleSelectChange(value) {
+        console.log('选中的值：', value);
+        // 在这里执行你需要的方法
+        this.InfoParams.orderStatus = value
+        this.getList();
+      },
       setTimes() {
         const now = new Date();
         this.InfoParams.queryEndDate = this.formatTime(now);
@@ -153,15 +206,16 @@
       getList() {
         this.loading = true;
         profitInfo(this.InfoParams).then(response => {
-          this.orderNum = response.data.todayOrderNum
+          this.orderNum = response.data.todayProfit
           this.moneyLy = response.data.todayProfit
-          this.userNum = response.data.totalExtendUserNum
+          this.userNum = response.data.todayOrderNum
           this.money = response.data.balance
           this.form.withdrawMoney = response.data.balance
         })
         profitList(this.InfoParams).then(response => {
           this.loading = false
-          this.orderList = response.data
+          this.orderList = response.data.list
+          this.total = response.data.total
         })
       },
 

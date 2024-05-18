@@ -252,7 +252,7 @@ export const constantRoutes = [
         path: '/profit',
         component: () => import('@/views/profit'),
         name: 'Profit',
-        meta: { title: '利润统计', icon: 'dashboard', affix: true }
+        meta: { title: '订单管理', icon: 'dashboard', affix: true }
       }
     ]
   },
