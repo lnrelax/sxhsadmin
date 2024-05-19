@@ -23,6 +23,7 @@
       <el-table v-loading="loading" :data="orderList" height="580">
         <el-table-column label="姓名" prop="userName" width="180" align="center" />
         <el-table-column label="昵称" prop="nickName"  width="120" align="center"/>
+        <el-table-column label="城市" prop="userCityName"  width="120" align="center"/>
         <el-table-column label="性别" prop="userSex" :formatter="userSexFormat" width="150" align="center"/>
         <el-table-column label="年龄" prop="userAge" width="100" align="center"/>
         <el-table-column label="电话" prop="userPhone" width="160" align="center"/>

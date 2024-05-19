@@ -286,6 +286,20 @@ export const constantRoutes = [
   },
 
   {
+    path: '/balance',
+    component: Layout,
+    redirect: 'balance',
+    children: [
+      {
+        path: '/balance',
+        component: () => import('@/views/balance'),
+        name: 'Balance',
+        meta: { title: '余额明细', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+
+  {
     path: '/userInfoTg',
     component: Layout,
     redirect: 'profit',

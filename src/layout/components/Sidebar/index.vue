@@ -72,7 +72,7 @@
 
       <el-menu-item v-if="userType == 2" index="/profit" >
         <i class="el-icon-platform-eleme"></i>
-        <span slot="title">利润统计</span>
+        <span slot="title">订单管理</span>
       </el-menu-item>
 
       <el-menu-item v-if="userType == 2" index="/extendTg" >
@@ -83,6 +83,11 @@
       <el-menu-item v-if="userType == 2" index="/withdrawTg" >
         <i class="el-icon-s-order"></i>
         <span slot="title">提现记录</span>
+      </el-menu-item>
+
+      <el-menu-item v-if="userType == 2" index="/balance" >
+        <i class="el-icon-s-order"></i>
+        <span slot="title">余额明细</span>
       </el-menu-item>
 
       <el-menu-item v-if="userType == 2" index="/userInfoTg" >

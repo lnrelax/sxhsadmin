@@ -557,3 +557,15 @@ export function paltTodayAnalyze() {
   })
 }
 
+//车费删除
+export function balanceDetail(data) {
+  return request({
+    url: '/extend/balanceDetail',
+    headers: {
+      DtdToken: getToken(),
+    },
+    method: 'post',
+    data:data
+  })
+}
+

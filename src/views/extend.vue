@@ -26,7 +26,7 @@
         <el-table-column label="分成比例" prop="divideNum" :formatter="divideNumFormat" width="100" align="center"/>
         <el-table-column label="联系人" prop="extendConnName" width="160" align="center"/>
         <el-table-column label="联系人电话" prop="extendPhone" width="160" align="center"/>
-       
+        <el-table-column label="推广链接" prop="ext2" width="260" align="center"/>
         <el-table-column label="登录账号" prop="account" width="120" align="center"/>
         <el-table-column label="密码" prop="password" width="100" align="center"/>
         <el-table-column label="审核状态" prop="enable" :formatter="enableFormat" width="120" align="center"/>
@@ -104,7 +104,7 @@
           value: '1',
           label: '审核通过'
         }],
-        statusStr:"",
+        statusStr:"全部",
         extendId:0,
         dialogVisible:false,
         dialogFormVisible:false,

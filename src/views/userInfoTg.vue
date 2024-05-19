@@ -85,9 +85,15 @@
                     </el-form-item>
                 </el-col>
 
-                <el-col :span="span">
+                <!-- <el-col :span="span">
                   <el-form-item label="店铺码" >
                         <el-input v-model="userInfo.shopCode"  readonly></el-input>
+                    </el-form-item>
+                </el-col> -->
+
+                <el-col :span="span">
+                  <el-form-item label="推广链接" >
+                        <el-input v-model="userInfo.ext2"  readonly></el-input>
                     </el-form-item>
                 </el-col>
 
@@ -218,6 +224,7 @@
             queryEndDate: ""
         },
         span:12,
+        balance:0,
 
       };
     },
@@ -246,6 +253,7 @@
         })
         profitInfo(this.InfoParams).then(response => {
           this.form.withdrawMoney = response.data.balance
+          this.balance = response.data.balance
         })
       },
       editPwd(){
@@ -271,6 +279,14 @@
       },
 
       commit(){
+        if(this.form.withdrawMoney < 0){
+          this.$message.error('提现金额不能小于0');
+          return
+        }
+        if(this.form.withdrawMoney > this.balance){
+          this.$message.error('提现金额不能大于可提现余额,当前可提现余额：'+this.balance);
+          return
+        }
         profitTx(this.form).then(response => {
           this.loading = false
           this.dialogFormVisibleTx = false
