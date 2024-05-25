@@ -59,6 +59,19 @@
           <div>
             <el-statistic
               group-separator=","
+              :value="zData.completeNum"
+              title="完成单数"
+            >
+            <template slot="prefix">
+              <i class="el-icon-s-claim" style="color: coral"></i>
+            </template>
+          </el-statistic>
+          </div>
+        </el-col>
+        <el-col :span="zSpan" class="mt30">
+          <div>
+            <el-statistic
+              group-separator=","
               :value="zData.refundNum"
               title="退款总数"
             >
