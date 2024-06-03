@@ -50,7 +50,7 @@
         <el-table-column label="下单地址" prop="address" width="150" align="center"/>
         <el-table-column label="客户订单状态" prop="orderStatus" width="120" align="center"/>
         <el-table-column label="下单技师姓名" prop="artificerName" width="120" align="center"/>
-        <el-table-column label="转单技师姓名" prop="transferName" width="120" align="center"/>
+        <!-- <el-table-column label="转单技师姓名" prop="transferName" width="120" align="center"/> -->
         <el-table-column label="技师订单状态" prop="artificerStatus" width="120" align="center"/>
         <el-table-column label="客户预约时间" prop="appointTime" width="160" align="center"/>
         <el-table-column label="订单时间" prop="orderTime" width="160" align="center"/>
