@@ -146,10 +146,21 @@
     },
     methods: {
       setTimes() {
-        const now = new Date();
-        this.Params.queryEndDate = this.formatTime(now);
-        const sevenDaysAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
-        this.Params.queryStartDate = this.formatTime(sevenDaysAgo);
+        var now = new Date();
+        var start = new Date()
+        // 格式化日期
+        var year = now.getFullYear();
+        var month = (now.getMonth() + 1 < 10 ? '0' : '') + (now.getMonth() + 1);
+        var day = (now.getDate() < 10 ? '0' : '') + now.getDate();
+        var formattedDate = year + '-' + month + '-' + day;
+        start.setDate(now.getDate() - 7);
+        var startyear = start.getFullYear();
+        var startmonth = (start.getMonth() + 1 < 10 ? '0' : '') + (start.getMonth() + 1);
+        var startday = (start.getDate() < 10 ? '0' : '') + start.getDate();
+        var startformattedDate = startyear + '-' + startmonth + '-' + startday;
+
+        this.Params.queryEndDate = formattedDate;
+        this.Params.queryStartDate = startformattedDate;
       },
       formatTime(date) {
         return date.toISOString().split('T')[0];
