@@ -31,6 +31,7 @@
 <script>
 import ScrollPane from './ScrollPane'
 import path from 'path'
+import { getUserType } from '@/utils/auth'
 
 export default {
   components: { ScrollPane },
@@ -40,12 +41,28 @@ export default {
       top: 0,
       left: 0,
       selectedTag: {},
-      affixTags: []
+      affixTags: [],
+      userType: getUserType(),
+      visitedViewsList:[],
+      newVisitedViews:[],
     }
   },
   computed: {
     visitedViews() {
-      return this.$store.state.tagsView.visitedViews
+      
+      // if(this.userType == 1){
+        return this.$store.state.tagsView.visitedViews
+      // }else{
+      //   this.visitedViewsList = this.$store.state.tagsView.visitedViews
+      //   this.newVisitedViews = []
+      //   for (let index = 0; index < this.visitedViewsList.length; index++) {
+      //     const element = this.visitedViewsList[index];
+      //     if(element.fullPath != '/index'){
+      //       this.newVisitedViews.push(element)
+      //     }
+      //   }
+      //   return this.newVisitedViews
+      // }
     },
     routes() {
       return this.$store.state.permission.routes

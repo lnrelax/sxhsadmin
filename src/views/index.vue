@@ -1,17 +1,12 @@
 <template>
-  <div class="app-container">
-
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>平台总分析</span>
-      </div>
-      <el-row :gutter="20">
-        <el-col :span="zSpan">
+    <div class="app-container">
+      <el-row v-if="userType == 2" :gutter="20">
+        <el-col :span="6">
           <div>
             <el-statistic
               group-separator=","
-              :value="zData.userNum"
-              title="用户数"
+              :value="userNum"
+              title="总用户数"
             >
             <template slot="prefix">
               <i class="el-icon-user-solid" style="color: red"></i>
@@ -19,194 +14,100 @@
           </el-statistic>
           </div>
         </el-col>
-        <el-col :span="zSpan">
+        <el-col :span="6">
           <div>
-            <el-statistic title="技师数"
-            :value="zData.massageNum">
+            <el-statistic title="今日新增"
+            :value="newUserNum">
             <template slot="prefix">
               <i class="el-icon-user-solid" style="color: blue"></i>
             </template>
             </el-statistic>
           </div>
         </el-col>
-        <el-col :span="zSpan">
-          <div>
-            <el-statistic
-              group-separator=","
-              :value="zData.extendNum"
-              title="推广团队数"
-            >
-            <template slot="prefix">
-              <i class="el-icon-star-on" style="color: aqua"></i>
-            </template>
-          </el-statistic>
-          </div>
-        </el-col>
-        <el-col :span="zSpan">
-          <div>
-            <el-statistic
-              group-separator=","
-              :value="zData.orderNum"
-              title="订单总数"
-            >
-            <template slot="prefix">
-              <i class="el-icon-s-order" style="color: coral"></i>
-            </template>
-          </el-statistic>
-          </div>
-        </el-col>
-        <el-col :span="zSpan" class="mt30">
-          <div>
-            <el-statistic
-              group-separator=","
-              :value="zData.completeNum"
-              title="完成单数"
-            >
-            <template slot="prefix">
-              <i class="el-icon-s-claim" style="color: coral"></i>
-            </template>
-          </el-statistic>
-          </div>
-        </el-col>
-        <el-col :span="zSpan" class="mt30">
-          <div>
-            <el-statistic
-              group-separator=","
-              :value="zData.refundNum"
-              title="退款总数"
-            >
-            <template slot="prefix">
-              <i class="el-icon-message-solid" style="color: red"></i>
-            </template>
-          </el-statistic>
-          </div>
-        </el-col>
-        <el-col :span="zSpan" class="mt30">
-          <div>
-            <el-statistic
-              group-separator=","
-              :value="zData.waterMoney"
-              title="总流水"
-            >
-            <template slot="prefix">
-              <i class="el-icon-s-data" style="color: aquamarine"></i>
-            </template>
-          </el-statistic>
-          </div>
-        </el-col>
-        <el-col :span="zSpan" class="mt30">
-          <div>
-            <el-statistic
-              group-separator=","
-              :value="zData.profitMoney"
-              title="总利润"
-            >
-            <template slot="prefix">
-              <i class="el-icon-s-marketing" style="color: blueviolet"></i>
-            </template>
-          </el-statistic>
-          </div>
-        </el-col>
       </el-row>
-    </el-card>
-
-    <el-card class="box-card" style="margin-top:20px;">
-      <div slot="header" class="clearfix">
-        <span>当日分析</span>
-      </div>
-      <el-row :gutter="20">
-        <el-col style="width: 20%;">
-          <div>
-            <el-statistic
-              group-separator=","
-              :value="jData.userNum"
-              title="用户数"
-            >
-            <template slot="prefix">
-              <i class="el-icon-user-solid" style="color: red"></i>
-            </template>
-          </el-statistic>
-          </div>
-        </el-col>
-        <el-col style="width: 20%;">
-          <div>
-            <el-statistic title="订单总数"
-            :value="jData.orderNum">
-            <template slot="prefix">
-              <i class="el-icon-s-order" style="color: coral"></i>
-            </template>
-            </el-statistic>
-          </div>
-        </el-col>
-        <el-col style="width: 20%;">
-          <div>
-            <el-statistic title="退款总数"
-            :value="jData.refundNum">
-            <template slot="prefix">
-              <i class="el-icon-message-solid" style="color: red"></i>
-            </template>
-            </el-statistic>
-          </div>
-        </el-col>
-        <el-col style="width: 20%;">
-          <div>
-            <el-statistic title="总流水"
-            :value="jData.waterMoney">
-            <template slot="prefix">
-              <i class="el-icon-s-data" style="color: aquamarine"></i>
-            </template>
-            </el-statistic>
-          </div>
-        </el-col>
-        <el-col style="width: 20%;">
-          <div>
-            <el-statistic title="总利润"
-            :value="jData.profitMoney">
-            <template slot="prefix">
-              <i class="el-icon-s-marketing" style="color: blueviolet"></i>
-            </template>
-            </el-statistic>
-          </div>
-        </el-col>
-      </el-row>
-    </el-card>
-
-  </div>
-</template>
-
-<script>
-
-import { paltAnalyze , paltTodayAnalyze } from '@/api/order'
-
-export default {
-  data() {
-    return {
-      zData:{},
-      jData:{},
-      orderList:[],
-      zSpan:6,
-      jSpan:6,
-    };
-  },
-  created() {
-    this.getList()
-  },
-  methods: {
-    getList() {
-      paltAnalyze().then(response => {
-        this.zData = response.data
-      })
-      paltTodayAnalyze().then(response => {
-        this.jData = response.data
-      })
+      <el-table v-loading="loading" :data="orderList" height="580" :style="userType == 2?'margin-top: 10px;':''">
+        <el-table-column label="用户手机号" prop="phone" :formatter="phoneFormat" align="center"/>
+        <el-table-column label="登录城市" prop="area"  align="center"/>
+        <el-table-column label="注册时间" prop="registerTime"  align="center"/>
+        <el-table-column label="最近登录" prop="lastLoginTime"  align="center"/>
+      </el-table>
+  
+      <pagination
+        v-show="total>0"
+        :total="total"
+        :page.sync="Params.pageNum"
+        :limit.sync="Params.pageSize"
+        @pagination="getList"
+      />
+    </div>
+  </template>
+  
+  <script>
+  import { getUserNum , getUserList } from '@/api/order'
+  import Cookies from "js-cookie";
+  import { getUserType } from '@/utils/auth'
+  
+  export default {
+    data() {
+      return {
+        // 遮罩层
+        loading: true,
+        // 总条数
+        total: 0,
+        // 查询参数
+        Params: {
+          pageNum: 1,
+          pageSize: 10,
+        },
+        UserNumParams:{
+          userAccount:Cookies.get("username"),
+          password:Cookies.get("password")
+        },
+        userType:getUserType(),
+        status:0,
+        // 日期范围
+        dateRange: [],
+        orderList:[],
+        like: true,
+        userNum: 0,
+        newUserNum: 0,
+      };
     },
-  }
-};
-</script>
+    created() {
+      this.getList()
+    },
+    methods: {
+      getList() {
+        this.loading = true;
+        getUserNum(this.UserNumParams).then(response => {
+          console.log(response)
+          this.userNum = response.data.totalUserNum
+          this.newUserNum = response.data.todayUserNum
+        })
+        getUserList(this.Params).then(response => {
+          this.loading = false
+          console.log(response)
+          this.orderList = response.data.list
+          this.total = response.data.total
+        })
+      },
+      phoneFormat(row, column) {
+        console.log(row)
+        if(row.phone == null || row.phone == ''){
+          return "暂无"
+        }else{
+          return row.phone
+        }
+        
+      },
+    }
+  };
+  </script>
 
-<style scoped lang="scss">
-.mt30{
-  margin-top: 30px;
+<style lang="scss">
+.like {
+  cursor: pointer;
+  font-size: 25px;
+  display: inline-block;
 }
 </style>
-

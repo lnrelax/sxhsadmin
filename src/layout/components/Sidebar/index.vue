@@ -14,7 +14,7 @@
                 :default-active="$route.path"
                 >
 
-                <el-menu-item v-if="userType == 1" index="/" >
+                <el-menu-item v-if="userType == 1" index="/dataInfo" >
                   <i class="el-icon-s-home"></i>
         <span slot="title">统计分析</span>
       </el-menu-item>
@@ -24,7 +24,7 @@
         <span slot="title">订单管理</span>
       </el-menu-item>
 
-      <el-menu-item index="/userInfo" >
+      <el-menu-item index="/" >
         <i class="el-icon-user-solid"></i>
         <span slot="title">用户管理</span>
       </el-menu-item>
@@ -143,6 +143,13 @@ export default {
     methods: {
       menuListSet(){
         console.log("userType:",this.userType)
+
+        if(this.userType == 2){
+              this.$router.push({ path: "/"}).catch((err)=>{console.log(err)});
+            }else{
+              // this.$router.push({ path: '/userInfo'}, { replace: true }).catch((err)=>{console.log(err)});
+              this.$router.replace({ path: '/dataInfo'});
+            }
 
       },
       handleOpen(key, keyPath) {

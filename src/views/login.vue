@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">奇缘后台管理系统</h3>
+      <h3 class="title">奇缘到家</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -47,7 +47,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      
+      <a href="https://beian.miit.gov.cn/" target="_blank">晋ICP备2024039370号-1</a>
     </div>
   </div>
 </template>
@@ -134,10 +134,10 @@ export default {
           }
           this.$store.dispatch("Login", this.loginForm).then(() => {
             const userType = getUserType();
-            if(userType == 1){
+            if(userType == 2){
               this.$router.push({ path: "/" || "/" }).catch((err)=>{console.log(err)});
             }else{
-              this.$router.push({ path: '/userInfo' || "/userInfo" }).catch((err)=>{console.log(err)});
+              this.$router.push({ path: '/dataInfo' || "/dataInfo" }).catch((err)=>{console.log(err)});
             }
             
           }).catch(() => {

@@ -175,8 +175,8 @@
           value: '3',
           label: '服务中'
         }, {
-          value: '4已完成',
-          label: '待支付'
+          value: '4',
+          label: '已完成'
         }, {
           value: '6',
           label: '退款完成'

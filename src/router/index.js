@@ -61,15 +61,29 @@ export const constantRoutes = [
     component: () => import('@/views/error/401'),
     hidden: true
   },
+  // {
+  //   path: '',
+  //   component: Layout,
+  //   redirect: 'index',
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/index'),
+  //       name: 'Index',
+  //       meta: { title: '统计分析', icon: 'dashboard', affix: true }
+  //     }
+  //   ]
+  // },
+
   {
-    path: '',
+    path: '/dataInfo',
     component: Layout,
-    redirect: 'index',
+    redirect: 'dataInfo',
     children: [
       {
-        path: 'index',
-        component: () => import('@/views/index'),
-        name: 'Index',
+        path: '/dataInfo',
+        component: () => import('@/views/dataInfo'),
+        name: 'DataInfo',
         meta: { title: '统计分析', icon: 'dashboard', affix: true }
       }
     ]
@@ -90,14 +104,14 @@ export const constantRoutes = [
   },
 
   {
-    path: '/userInfo',
+    path: '',
     component: Layout,
-    redirect: 'userInfo',
+    redirect: 'index',
     children: [
       {
-        path: '/userInfo',
-        component: () => import('@/views/userInfo'),
-        name: 'UserInfo',
+        path: 'index',
+        component: () => import('@/views/index'),
+        name: 'Index',
         meta: { title: '用户管理', icon: 'dashboard', affix: true }
       }
     ]
