@@ -1,10 +1,15 @@
 <template>
     <div class="app-container">
 
-      <el-form :model="InfoParams" ref="queryForm" size="small" :inline="true">
+      <template>
+            <el-tabs v-model="activeName" @tab-click="handleClick">
+                <el-tab-pane label="已支付订单" name="first">
+
+                  <el-form :model="InfoParams" ref="queryForm" size="small" :inline="true">
         
         <el-form-item label="订单时间">
           <el-date-picker
+            
             v-model="dateRange"
             style="width: 240px"
             value-format="yyyy-MM-dd"
@@ -15,6 +20,7 @@
             :end-placeholder="InfoParams.queryEndDate"
           ></el-date-picker>
         </el-form-item>
+
         <el-form-item label="订单状态">
             <!-- <el-button type="primary" size="mini" @click="profitT()">提现</el-button> -->
             <el-select
@@ -40,39 +46,109 @@
           <div>
             <el-statistic
               group-separator=","
-              :value="userNum"
-              title="订单总数"
+              :value="todayOrderNum"
+              title="总订单数量"
             >
             <template slot="prefix">
-              <i class="el-icon-s-order" style="color: red"></i>
+              <i class="el-icon-s-order" style="color: coral"></i>
             </template>
           </el-statistic>
           </div>
         </el-col>
-        <!-- <el-col :span="6">
-          <div>
-            <el-statistic
-            group-separator=","
-            :precision="2"
-            :value="money"
-            title="退款单数"
-          >
-            <template slot="prefix">
-              <i class="el-icon-delete-solid" style="color: green"></i>
-            </template>
-          </el-statistic>
-          </div>
-        </el-col> -->
 
         <el-col :span="6">
           <div>
             <el-statistic
               group-separator=","
-              :value="orderNum"
-              title="利润"
+              :value="completeOrderNum"
+              title="成交订单数量"
             >
             <template slot="prefix">
-              <i class="el-icon-s-marketing" style="color: blue"></i>
+              <i class="el-icon-s-marketing" style="color: blueviolet"></i>
+            </template>
+          </el-statistic>
+          </div>
+        </el-col>
+
+        <el-col :span="6">
+          <div>
+            <el-statistic
+              group-separator=","
+              :value="refundOrderNum"
+              title="退款订单数量"
+            >
+            <template slot="prefix">
+              <i class="el-icon-message-solid" style="color: red"></i>
+            </template>
+          </el-statistic>
+          </div>
+        </el-col>
+
+        <el-col :span="6">
+          <div>
+            <el-statistic
+              group-separator=","
+              :value="servedOrderNum"
+              title="进行中订单数量"
+            >
+            <template slot="prefix">
+              <i class="el-icon-s-data" style="color: blue"></i>
+            </template>
+          </el-statistic>
+          </div>
+        </el-col>
+
+        <el-col :span="6">
+          <div style="margin-top: 10px;">
+            <el-statistic
+              group-separator=","
+              :value="orderTotayMoney"
+              title="总订单金额"
+            >
+            <template slot="prefix">
+              <i class="el-icon-s-data" style="color: coral"></i>
+            </template>
+          </el-statistic>
+          </div>
+        </el-col>
+
+        <el-col :span="6">
+          <div style="margin-top: 10px;">
+            <el-statistic
+              group-separator=","
+              :value="orderCouponMoney"
+              title="成交订单金额"
+            >
+            <template slot="prefix">
+              <i class="el-icon-s-data" style="color: blueviolet"></i>
+            </template>
+          </el-statistic>
+          </div>
+        </el-col>
+
+        <el-col :span="6">
+          <div style="margin-top: 10px;">
+            <el-statistic
+              group-separator=","
+              :value="refundMoney"
+              title="退款订单金额"
+            >
+            <template slot="prefix">
+              <i class="el-icon-s-data" style="color: red"></i>
+            </template>
+          </el-statistic>
+          </div>
+        </el-col>
+
+        <el-col :span="6">
+          <div style="margin-top: 10px;">
+            <el-statistic
+              group-separator=","
+              :value="completeMoney"
+              title="订单优惠券金额"
+            >
+            <template slot="prefix">
+              <i class="el-icon-s-data" style="color: blue"></i>
             </template>
           </el-statistic>
           </div>
@@ -88,6 +164,7 @@
         <el-table-column label="预约时间" prop="appointTime" width="180" align="center"/>
         <el-table-column label="服务项目" prop="serviceName"  align="center"/>
         <el-table-column label="项目金额" prop="serviceMoney"  align="center"/>
+        <el-table-column label="优惠券金额" prop="couponMoney" width="100"  align="center"/>
         <el-table-column label="推广利润" prop="extendProfit"  align="center"/>
         <el-table-column label="打车费" prop="taxiMoney"  align="center"/>
         <el-table-column label="创建时间" prop="createTime" width="180" align="center"/>
@@ -110,6 +187,66 @@
         :limit.sync="InfoParams.pageSize"
         @pagination="getList"
       />
+
+                </el-tab-pane>
+
+                <el-tab-pane label="待支付订单" name="second">
+
+<el-form :model="InfoParams" ref="queryForm" size="small" :inline="true">
+
+<el-form-item label="订单时间">
+<el-date-picker
+v-model="dateRange"
+style="width: 240px"
+value-format="yyyy-MM-dd"
+type="daterange"
+range-separator="-"
+@change="handleDateChange"
+:start-placeholder="InfoParams.queryStartDate"
+:end-placeholder="InfoParams.queryEndDate"
+></el-date-picker>
+</el-form-item>
+
+</el-form>
+
+<el-table v-loading="loading" :data="orderList" height="580" style="margin-top: 10px;">
+<el-table-column label="订单号" prop="orderId" width="180"  align="center"/>
+<el-table-column label="用户手机号" prop="userPhone" width="120" align="center"/>
+<el-table-column label="下单地址" prop="address" width="400" align="center"/>
+<el-table-column label="订单状态" prop="orderStatus"  align="center"/>
+<el-table-column label="预约时间" prop="appointTime" width="180" align="center"/>
+<el-table-column label="服务项目" prop="serviceName"  align="center"/>
+<el-table-column label="项目金额" prop="serviceMoney"  align="center"/>
+<el-table-column label="优惠券金额" prop="couponMoney" width="100" align="center"/>
+<el-table-column label="推广利润" prop="extendProfit"  align="center"/>
+<el-table-column label="打车费" prop="taxiMoney"  align="center"/>
+<el-table-column label="创建时间" prop="createTime" width="180" align="center"/>
+<el-table-column label="服务图片"  width="180" align="center">
+<template slot-scope="scope">
+<el-image 
+style="width: 180px; height: 50px"
+:src="scope.row.serviceImage" 
+:preview-src-list="[scope.row.serviceImage]">
+</el-image>
+</template>
+
+</el-table-column>
+</el-table>
+
+<pagination
+v-show="total>0"
+:total="total"
+:page.sync="InfoParams.pageNum"
+:limit.sync="InfoParams.pageSize"
+@pagination="getList"
+/>
+
+</el-tab-pane>
+
+            </el-tabs>
+      </template>
+
+      
 
       <el-dialog title="提现" :visible.sync="dialogFormVisibleAdd">
         <el-form :model="form">
@@ -135,6 +272,7 @@
   export default {
     data() {
       return {
+        activeName: 'first',
         // 遮罩层
         loading: true,
         // 总条数
@@ -159,15 +297,20 @@
         money: 0,
         orderNum:0,
         moneyLy:0,
+        todayOrderNum:0,
+        completeOrderNum:0,
+        refundOrderNum:0,
+        orderTotayMoney:0,
+        completeMoney:0,
+        orderCouponMoney:0,
+        refundMoney:0,
+        servedOrderNum:0,
         dialogFormVisibleAdd:false,
         formLabelWidth: '120px',
         statusStr:"全部",
         options: [{
           value: '0',
           label: '全部'
-        }, {
-          value: '1',
-          label: '待支付'
         }, {
           value: '2',
           label: '待服务'
@@ -189,6 +332,22 @@
       this.getList()
     },
     methods: {
+      handlePickerBlur() {
+        // 处理失焦事件，手动隐藏日期选择器
+        this.$nextTick(() => {
+          this.$refs.datePicker.pickerVisible = false;
+        });
+      },
+      handleClick(tab, event) {
+        console.log(tab, event);
+        if(this.activeName == "first"){
+          this.InfoParams.orderStatus = 0
+          this.statusStr = "全部"
+        }else if(this.activeName == "second"){
+          this.InfoParams.orderStatus = 1
+        }
+        this.getList()
+      },
       handleSelectChange(value) {
         console.log('选中的值：', value);
         // 在这里执行你需要的方法
@@ -211,6 +370,14 @@
           this.userNum = response.data.todayOrderNum
           this.money = response.data.balance
           this.form.withdrawMoney = response.data.balance
+          this.todayOrderNum = response.data.todayOrderNum
+          this.completeOrderNum = response.data.completeOrderNum
+          this.refundOrderNum = response.data.refundOrderNum
+          this.orderTotayMoney = response.data.orderTotayMoney
+          this.completeMoney = response.data.completeMoney
+          this.orderCouponMoney = response.data.orderCouponMoney
+          this.refundMoney = response.data.refundMoney
+          this.servedOrderNum = response.data.servedOrderNum
         })
         profitList(this.InfoParams).then(response => {
           this.loading = false

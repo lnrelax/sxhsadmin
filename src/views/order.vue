@@ -153,7 +153,7 @@
         var month = (now.getMonth() + 1 < 10 ? '0' : '') + (now.getMonth() + 1);
         var day = (now.getDate() < 10 ? '0' : '') + now.getDate();
         var formattedDate = year + '-' + month + '-' + day;
-        start.setDate(now.getDate() - 7);
+        //start.setDate(now.getDate() - 7);
         var startyear = start.getFullYear();
         var startmonth = (start.getMonth() + 1 < 10 ? '0' : '') + (start.getMonth() + 1);
         var startday = (start.getDate() < 10 ? '0' : '') + start.getDate();
