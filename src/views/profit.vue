@@ -116,7 +116,7 @@
           <div style="margin-top: 10px;">
             <el-statistic
               group-separator=","
-              :value="orderCouponMoney"
+              :value="completeMoney"
               title="成交订单金额"
             >
             <template slot="prefix">
@@ -144,7 +144,7 @@
           <div style="margin-top: 10px;">
             <el-statistic
               group-separator=","
-              :value="completeMoney"
+              :value="orderCouponMoney"
               title="订单优惠券金额"
             >
             <template slot="prefix">
