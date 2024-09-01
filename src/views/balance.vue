@@ -3,9 +3,9 @@
       
       <el-table v-loading="loading" :data="orderList" height="580">
         <el-table-column label="订单号" prop="orderId" align="center"/>
+        <el-table-column label="更新后余额" prop="nowBalance"  align="center"/>
         <el-table-column label="原有余额" prop="oldBalance"  align="center"/>
         <el-table-column label="更新余额" prop="updateBalance"  align="center"/>
-        <el-table-column label="更新后余额" prop="nowBalance"  align="center"/>
         <el-table-column label="更新原因" prop="ext1"  align="center"/>
         <el-table-column label="更新时间" prop="insertTime"  align="center"/>
       </el-table>

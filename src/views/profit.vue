@@ -7,10 +7,30 @@
 
           <el-form :model="InfoParams" ref="queryForm" size="small" :inline="true">
 
-            <el-form-item label="订单时间">
+            <!-- <el-form-item label="订单时间">
               <el-date-picker v-model="dateRange" style="width: 240px" value-format="yyyy-MM-dd" type="daterange"
                 range-separator="-" @change="handleDateChange" :start-placeholder="InfoParams.queryStartDate"
                 :end-placeholder="InfoParams.queryEndDate"></el-date-picker>
+            </el-form-item> -->
+
+            <el-form-item label="开始时间">
+                <el-date-picker
+                  style="margin-left: 5px;"
+                  v-model="InfoParams.queryStartDate"
+                  type="date"
+                  @change="handleDateChange"
+                  placeholder="开始时间">
+                </el-date-picker>
+            </el-form-item>
+
+            <el-form-item label="结束时间">
+                <el-date-picker
+                  style="margin-left: 5px;"
+                  v-model="InfoParams.queryEndDate"
+                  type="date"
+                  @change="handleEndDateChange"
+                  placeholder="结束时间">
+                </el-date-picker>
             </el-form-item>
 
             <el-form-item label="订单状态">
@@ -138,10 +158,30 @@
 
           <el-form :model="InfoParams" ref="queryForm" size="small" :inline="true">
 
-            <el-form-item label="订单时间">
+            <!-- <el-form-item label="订单时间">
               <el-date-picker v-model="dateRange" style="width: 240px" value-format="yyyy-MM-dd" type="daterange"
                 range-separator="-" @change="handleDateChange" :start-placeholder="InfoParams.queryStartDate"
                 :end-placeholder="InfoParams.queryEndDate"></el-date-picker>
+            </el-form-item> -->
+
+            <el-form-item label="开始时间">
+                <el-date-picker
+                  style="margin-left: 5px;"
+                  v-model="InfoParams.queryStartDate"
+                  type="date"
+                  @change="handleDateChange"
+                  placeholder="开始时间">
+                </el-date-picker>
+            </el-form-item>
+
+            <el-form-item label="结束时间">
+                <el-date-picker
+                  style="margin-left: 5px;"
+                  v-model="InfoParams.queryEndDate"
+                  type="date"
+                  @change="handleEndDateChange"
+                  placeholder="结束时间">
+                </el-date-picker>
             </el-form-item>
 
           </el-form>
@@ -316,13 +356,32 @@ export default {
         this.total = response.data.total
       })
     },
-
     handleDateChange(value) {
       console.log('日期时间改变了，新值为：', value);
-      this.InfoParams.queryStartDate = value[0]
-      this.InfoParams.queryEndDate = value[1]
+      console.log("开始时间",value)
+      const dateObj = new Date(value);
+      const year = dateObj.getFullYear();
+      const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+      const day = dateObj.getDate().toString().padStart(2, '0');
+      this.InfoParams.queryStartDate = `${year}-${month}-${day}`;
+      // this.getList()
+    },
+    handleEndDateChange(value) {
+      console.log('日期时间改变了，新值为：', value);
+      console.log("开始时间",value)
+      const dateObj = new Date(value);
+      const year = dateObj.getFullYear();
+      const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+      const day = dateObj.getDate().toString().padStart(2, '0');
+      this.InfoParams.queryEndDate = `${year}-${month}-${day}`;
       this.getList()
     },
+    // handleDateChange(value) {
+    //   console.log('日期时间改变了，新值为：', value);
+    //   this.InfoParams.queryStartDate = value[0]
+    //   this.InfoParams.queryEndDate = value[1]
+    //   this.getList()
+    // },
     profitT() {
       this.dialogFormVisibleAdd = true
     },

@@ -547,13 +547,14 @@ export function paltAnalyze() {
 }
 
 //平台当日分析
-export function paltTodayAnalyze() {
+export function paltTodayAnalyze(data) {
   return request({
     url: '/admin/paltTodayAnalyze',
     headers: {
       DtdToken: getToken(),
     },
-    method: 'post'
+    method: 'post',
+    data:data
   })
 }
 
@@ -568,4 +569,53 @@ export function balanceDetail(data) {
     data:data
   })
 }
+
+
+//订单列表推广检索
+export function OrderExtendList() {
+  return request({
+    url: '/admin/extendList',
+    headers: {
+      DtdToken: getToken(),
+    },
+    method: 'post'
+  })
+}
+
+
+//订单列表城市检索
+export function cityList() {
+  return request({
+    url: '/admin/cityList',
+    headers: {
+      DtdToken: getToken(),
+    },
+    method: 'post'
+  })
+}
+
+// 后台推广管理余额清零
+export function balanceZero(data) {
+  return request({
+    url: '/extend/balanceZero',
+    headers: {
+      DtdToken: getToken(),
+    },
+    method: 'post',
+    data:data
+  })
+}
+
+// 后台推广管理提现记录
+export function withDrawInfo(data) {
+  return request({
+    url: '/extend/withDrawInfo',
+    headers: {
+      DtdToken: getToken(),
+    },
+    method: 'post',
+    data:data
+  })
+}
+
 

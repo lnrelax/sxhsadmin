@@ -24,6 +24,7 @@
         <el-table-column label="团队名称" prop="extendName" width="150" align="center" />
         <!-- <el-table-column label="所属平台" prop="typeChn" width="120" align="center" /> -->
         <el-table-column label="分成比例" prop="divideNum" :formatter="divideNumFormat" width="100" align="center"/>
+        <el-table-column label="可提现金额" prop="balance" width="160" align="center"/>
         <el-table-column label="联系人" prop="extendConnName" width="160" align="center"/>
         <el-table-column label="联系人电话" prop="extendPhone" width="160" align="center"/>
         <el-table-column label="推广链接" prop="ext2" width="260" align="center"/>
@@ -36,10 +37,12 @@
         <!-- <el-table-column label="店铺名称" prop="shopName" width="160" align="center"/> -->
         
 
-        <el-table-column label="操作" width="150" align="center" fixed="right">
+        <el-table-column label="操作" width="350" align="center" fixed="right">
             <template slot-scope="scope" >
-                <el-button :disabled="scope.row.enable == 0?false:true" type="success" size="mini" @click="dialog(scope.row.extendId)" >审核</el-button>
-                <el-button :disabled="scope.row.type == 1?false:true" type="primary" size="mini" @click="dialogForm(scope.row)">修改</el-button>
+              <el-button type="primary" size="mini" @click="del(scope.row.extendId)" >余额清零</el-button>
+              <el-button type="info" size="mini" @click="dialogInfo(scope.row.extendId)" >打款记录</el-button>
+              <el-button :disabled="scope.row.enable == 0?false:true" type="success" size="mini" @click="dialog(scope.row.extendId)" >审核</el-button>
+              <el-button :disabled="scope.row.type == 1?false:true" type="primary" size="mini" @click="dialogForm(scope.row)">修改</el-button>
                 
             </template>
       </el-table-column>
@@ -60,6 +63,19 @@
         </span>
       </el-dialog>
 
+      <el-dialog title="打款记录" :visible.sync="dialogDkVisible"
+        width="45%"
+        :before-close="handleCloseDk">
+        <span>
+          <el-table v-loading="loading" :data="infoList" height="300">
+            <el-table-column label="提现金额" prop="money" align="center" />
+            <el-table-column label="提现时间" prop="time" align="center" />
+          </el-table>
+
+        </span>
+        
+      </el-dialog>
+
       <el-dialog title="设置分成比例" :visible.sync="dialogFormVisible">
         <el-form :model="form">
           <el-form-item label="分成比例" :label-width="formLabelWidth">
@@ -77,7 +93,7 @@
   </template>
   
   <script>
-  import { extendList , examineExtend , extendSet } from '@/api/order'
+  import { extendList , examineExtend , extendSet , balanceZero , withDrawInfo} from '@/api/order'
   
   export default {
     data() {
@@ -94,6 +110,7 @@
         // 日期范围
         dateRange: [],
         orderList:[],
+        infoList:[],
         options: [{
           value: '2',
           label: '全部'
@@ -108,6 +125,7 @@
         extendId:0,
         dialogVisible:false,
         dialogFormVisible:false,
+        dialogDkVisible:false,
         form: {
           divideNum: '',
         },
@@ -121,6 +139,17 @@
       this.getList()
     },
     methods: {
+      del(id){
+        this.$confirm('确认清空余额？')
+          .then(_ => {
+            balanceZero({extendId:id}).then(response => {
+              this.getList();
+            })
+            done();
+          })
+          .catch(_ => {});
+        
+      },
       getList() {
         this.loading = true;
         extendList(this.Params).then(response => {
@@ -151,7 +180,12 @@
           return '全部'
         } 
       },
-
+      dialogInfo(id){
+        this.dialogDkVisible = true
+        withDrawInfo({extendId:id}).then(response => {
+          this.infoList = response.data
+        })
+      },
       dialog(id){
         this.dialogVisible = true
         this.extendId = id
@@ -160,6 +194,13 @@
         this.$confirm('确认关闭？')
           .then(_ => {
             done();
+          })
+          .catch(_ => {});
+      },
+      handleCloseDk(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done()
           })
           .catch(_ => {});
       },
