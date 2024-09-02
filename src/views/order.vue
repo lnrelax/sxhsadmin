@@ -150,7 +150,7 @@
           ></el-date-picker>
         </el-form-item>
 
-        <el-form-item label="订单号">
+        <!-- <el-form-item label="订单号">
           <el-input v-model="orderCode" placeholder="请输入订单号"></el-input>
         </el-form-item>
 
@@ -192,7 +192,7 @@
 
         <el-form-item >
           <el-button type="primary" size="mini" @click="orderCodeGet()">搜索</el-button>
-        </el-form-item>
+        </el-form-item> -->
 
       </el-form>
   
@@ -339,15 +339,15 @@
         return date.toISOString().split('T')[0];
       },
       handleClick(tab, event) {
-      console.log(tab, event);
-      if (this.activeName == "first") {
-        this.Params.orderStatus = 0
-        this.statusStr = "全部"
-      } else if (this.activeName == "second") {
-        this.Params.orderStatus = 1
-      }
-      this.getList()
-    },
+        console.log(tab, event);
+        if (this.activeName == "first") {
+          this.Params.orderStatus = 0
+          this.statusStr = "全部"
+        } else if (this.activeName == "second") {
+          this.Params.orderStatus = 1
+        }
+        this.getList()
+      },
       getList() {
         this.loading = true;
         getOrderList(this.Params).then(response => {
@@ -371,7 +371,7 @@
         console.log('选中的值：', value);
         // 在这里执行你需要的方法
         this.Params.orderStatus = value
-        // this.getList();
+        this.getList();
       },
       handleTdListChange(value) {
         console.log('选中的值：', value);
