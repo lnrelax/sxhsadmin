@@ -27,7 +27,8 @@
             style="width: 240px"
             value-format="yyyy-MM-dd"
             type="daterange"
-            range-separator="-"
+            unlink-panels
+            range-separator="至"
             @change="handleDateChange"
             :start-placeholder="Params.queryStartDate"
             :end-placeholder="Params.queryEndDate"
