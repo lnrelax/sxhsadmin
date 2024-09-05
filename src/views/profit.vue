@@ -124,6 +124,16 @@
               </div>
             </el-col>
 
+            <el-col :span="6">
+              <div style="margin-top: 10px;">
+                <el-statistic group-separator="," :value="todayProfit" title="利润">
+                  <template slot="prefix">
+                    <i class="el-icon-s-data" style="color: red"></i>
+                  </template>
+                </el-statistic>
+              </div>
+            </el-col>
+
           </el-row>
 
           <el-table v-loading="loading" :data="orderList" height="580" style="margin-top: 10px;">
@@ -275,6 +285,7 @@ export default {
       completeMoney: 0,
       orderCouponMoney: 0,
       refundMoney: 0,
+      todayProfit:0,
       servedOrderNum: 0,
       dialogFormVisibleAdd: false,
       formLabelWidth: '120px',
@@ -347,6 +358,7 @@ export default {
         this.orderTotayMoney = response.data.orderTotayMoney
         this.completeMoney = response.data.completeMoney
         this.orderCouponMoney = response.data.orderCouponMoney
+        this.todayProfit = response.data.todayProfit
         this.refundMoney = response.data.refundMoney
         this.servedOrderNum = response.data.servedOrderNum
       })

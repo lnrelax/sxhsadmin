@@ -35,9 +35,7 @@
           ></el-date-picker>
         </el-form-item>
 
-        <el-form-item label="订单号">
-          <el-input v-model="orderCode" placeholder="请输入订单号"></el-input>
-        </el-form-item>
+       
 
         <el-form-item label="推广团队" prop="status">
           <el-select
@@ -75,6 +73,10 @@
           </el-select>
         </el-form-item>
 
+        <el-form-item label="订单号">
+          <el-input v-model="orderCode" placeholder="请输入订单号"></el-input>
+        </el-form-item>
+
         <el-form-item >
           <el-button type="primary" size="mini" @click="orderCodeGet()">搜索</el-button>
         </el-form-item>
@@ -83,9 +85,10 @@
   
       <el-table v-loading="loading" :data="orderList" height="580">
         <el-table-column label="订单编号" prop="orderNumber" width="180" align="center"/>
-        <el-table-column label="推广名称" prop="extendName" :show-overflow-tooltip="true" width="120" align="center"/>
-        <el-table-column label="订单城市" prop="cityName" width="180" align="center"/>
-        <el-table-column label="项目名称" prop="serviceName" :show-overflow-tooltip="true" width="150" align="center"/>
+        <el-table-column label="推广名称" prop="extendName" :show-overflow-tooltip="true" width="100" align="center"/>
+        <el-table-column label="订单城市" prop="cityName" width="100" align="center"/>
+        <el-table-column label="下单次数" prop="orderIndex" width="80" align="center"/>
+        <el-table-column label="项目名称" prop="serviceName" :show-overflow-tooltip="true" width="120" align="center"/>
         <el-table-column label="项目金额" prop="serviceMoney" width="100" align="center"/>
         <el-table-column label="用户手机号" prop="userPhone" width="120" align="center"/>
         <el-table-column label="下单地址" prop="address" width="150" align="center"/>
