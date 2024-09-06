@@ -36,8 +36,9 @@
         <el-table-column label="店铺名称" prop="shopName" width="160" align="center"/> -->
         
 
-        <el-table-column label="操作" width="150" align="center" fixed="right">
+        <el-table-column label="操作" width="250" align="center" fixed="right">
             <template slot-scope="scope" >
+                <el-button type="info" size="mini" @click="dialogInfo(scope.row.extendId)" >推广统计</el-button>
                 <el-button :disabled="scope.row.enable == 0?false:true" type="success" size="mini" @click="dialog(scope.row.extendId)" >审核</el-button>
                 <el-button :disabled="scope.row.type == 1?false:true" type="primary" size="mini" @click="dialogForm(scope.row)">修改</el-button>
             </template>
@@ -46,7 +47,25 @@
 
       </el-table>
   
-    
+      <el-dialog title="推广统计" :visible.sync="dialogDkVisible"
+        width="85%"
+        :before-close="handleCloseDk">
+        <span>
+          <el-table v-loading="loading" :data="infoList" height="200">
+            <el-table-column label="推广总用户" prop="userNum" align="center" />
+            <el-table-column label="今日推广用户" prop="todayUserNum" align="center" />
+            <el-table-column label="近7天推广用户" prop="sevUserNum" align="center" />
+            <el-table-column label="近30天推广用户" prop="thiUserNum" align="center" />
+            <el-table-column label="推广总订单" prop="orderNum" align="center" />
+            <el-table-column label="今日推广订单" prop="todayOrderNum" align="center" />
+            <el-table-column label="近7天推广订单 " prop="sevOrderNum" align="center" />
+            <el-table-column label="近30天推广订单" prop="thiOrderNum" align="center" />
+          </el-table>
+
+        </span>
+        
+      </el-dialog>
+
 
       <el-dialog
         title="提示"
@@ -77,7 +96,7 @@
   </template>
   
   <script>
-  import { extendExtendList , divideSetConfig , divideSet , approve , extendInfo } from '@/api/order'
+  import { extendExtendList , divideSetConfig , divideSet , approve , extendInfo,extendSonInfo } from '@/api/order'
   
   export default {
     data() {
@@ -94,6 +113,7 @@
         // 日期范围
         dateRange: [],
         orderList:[],
+        infoList:[],
         options: [{
           value: '2',
           label: '全部'
@@ -108,6 +128,7 @@
         statusStr:"全部",
         extendId:0,
         dialogVisible:false,
+        dialogDkVisible:false,
         dialogFormVisible:false,
         form: {
           divideNum: '',
@@ -147,6 +168,13 @@
           return row.divideNum+'%'
         }
         
+      },
+      dialogInfo(id){
+        this.dialogDkVisible = true
+        extendSonInfo({extendId:id}).then(response => {
+          this.infoList = response.data
+        })
+      
       },
       enableFormat(row, column) {
         if(row.enable === 0) {

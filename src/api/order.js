@@ -619,3 +619,15 @@ export function withDrawInfo(data) {
 }
 
 
+// 后台推广管理推广统计
+export function extendSonInfo(data) {
+  return request({
+    url: '/extend/extendSonInfo',
+    headers: {
+      DtdToken: getToken(),
+    },
+    method: 'post',
+    data:data
+  })
+}
+

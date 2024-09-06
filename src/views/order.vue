@@ -348,8 +348,15 @@
         if (this.activeName == "first") {
           this.Params.orderStatus = 0
           this.statusStr = "全部"
+          this.Params.pageNum = 1
+          this.Params.pageSize = 10
         } else if (this.activeName == "second") {
           this.Params.orderStatus = 1
+          this.Params.extendId = ""
+          this.Params.cityName = ""
+          this.Params.pageNum = 1
+          this.Params.pageSize = 10
+
         }
         this.getList()
       },

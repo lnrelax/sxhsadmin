@@ -65,7 +65,7 @@
 
       <el-dialog title="打款记录" :visible.sync="dialogDkVisible"
         width="45%"
-        :before-close="handleCloseDk">
+       >
         <span>
           <el-table v-loading="loading" :data="infoList" height="300">
             <el-table-column label="提现金额" prop="money" align="center" />
