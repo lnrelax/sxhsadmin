@@ -337,9 +337,23 @@ export default {
       this.getList();
     },
     setTimes() {
-      const now = new Date();
-      this.InfoParams.queryEndDate = this.formatTime(now);
-      this.InfoParams.queryStartDate = this.formatTime(now);
+
+        var now = new Date();
+        var start = new Date()
+        // 格式化日期
+        var year = now.getFullYear();
+        var month = (now.getMonth() + 1 < 10 ? '0' : '') + (now.getMonth() + 1);
+        var day = (now.getDate() < 10 ? '0' : '') + now.getDate();
+        var formattedDate = year + '-' + month + '-' + day;
+        //start.setDate(now.getDate() - 7);
+        var startyear = start.getFullYear();
+        var startmonth = (start.getMonth() + 1 < 10 ? '0' : '') + (start.getMonth() + 1);
+        var startday = (start.getDate() < 10 ? '0' : '') + start.getDate();
+        var startformattedDate = startyear + '-' + startmonth + '-' + startday;
+
+        this.InfoParams.queryEndDate = formattedDate;
+        this.InfoParams.queryStartDate = startformattedDate;
+
     },
     formatTime(date) {
       return date.toISOString().split('T')[0];

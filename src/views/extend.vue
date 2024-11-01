@@ -29,7 +29,7 @@
         <el-table-column label="联系人电话" prop="extendPhone" width="160" align="center"/>
         <el-table-column label="推广链接" prop="ext2" width="260" align="center"/>
         <el-table-column label="登录账号" prop="account" width="120" align="center"/>
-        <el-table-column label="密码" prop="password" width="100" align="center"/>
+        <!-- <el-table-column label="密码" prop="password" width="100" align="center"/> -->
         <el-table-column label="审核状态" prop="enable" :formatter="enableFormat" width="120" align="center"/>
         <el-table-column label="申请时间" prop="applyTime" width="180" align="center"/>
         <el-table-column label="审核时间" prop="approveTime" width="180" align="center"/>
