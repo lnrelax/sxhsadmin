@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">奇缘到家</h3>
+      <h3 class="title">至享生活</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -159,7 +159,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url("../assets/images/login-bg.jpg");
+  background-image: url("../assets/images/zxbj.png");
   background-size: cover;
 }
 .title {
