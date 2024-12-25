@@ -56,7 +56,7 @@
           <el-form-item label="图片" :label-width="formLabelWidth" >
             <el-upload
               class="avatar-uploader"
-              action="https://www.sxhsit.com/sxhstest/image/imageUpload"
+              action="https://www.zxfnms.com/zxtest/image/imageUpload"
               :show-file-list="false"
               :on-success="imageSuccess"
               :before-upload="imageUpload">
@@ -68,7 +68,7 @@
           <el-form-item label="详情图片" :label-width="formLabelWidth" >
             <el-upload
               class="avatar-uploader"
-              action="https://www.sxhsit.com/sxhstest/image/imageUpload"
+              action="https://www.zxfnms.com/zxtest/image/imageUpload"
               :show-file-list="false"
               :on-success="imageInfoSuccess"
               :before-upload="imageInfoUpload">

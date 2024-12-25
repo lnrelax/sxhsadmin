@@ -213,7 +213,7 @@ export function imageList() {
     headers: {
       DtdToken: getToken(),
     },
-    method: 'get',
+    method: 'post',
   })
 }
 

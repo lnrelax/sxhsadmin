@@ -341,7 +341,7 @@
 
     <!--  底部  -->
     <div class="el-login-footer">
-      <a href="https://beian.miit.gov.cn/" target="_blank">晋ICP备2024039370号-1</a>
+      <a href="https://beian.miit.gov.cn/" target="_blank">晋ICP备2024052181号-1</a>
     </div>
 
   </div>

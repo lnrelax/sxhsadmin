@@ -47,7 +47,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <a href="https://beian.miit.gov.cn/" target="_blank">晋ICP备2024039370号-1</a>
+      <a href="https://beian.miit.gov.cn/" target="_blank">晋ICP备2024052181号-1</a>
     </div>
   </div>
 </template>
@@ -159,7 +159,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url("../assets/images/zxbj.png");
+  background-image: url("../assets/images/abg.png");
   background-size: cover;
 }
 .title {
@@ -172,7 +172,8 @@ export default {
   border-radius: 6px;
   background: #ffffff;
   width: 400px;
-  margin-left:52%;
+  justify-content: center;
+  align-items: center;
   padding: 25px 25px 5px 25px;
   .el-input {
     height: 38px;
