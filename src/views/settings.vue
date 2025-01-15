@@ -24,14 +24,6 @@
                         <el-input v-model="initSysB" class="input"></el-input>
                         <el-button type="primary" size="mini" class="button" @click="commit(11)">提交</el-button>
                     </el-form-item>
-                    <el-form-item label="系统初始池(勿动)">
-                        <el-input v-model="initSysD" class="input"></el-input>
-                        <el-button type="primary" size="mini" class="button" @click="commit(13)">提交</el-button>
-                    </el-form-item>
-                    <el-form-item label="系统初始常置(勿动)">
-                        <el-input v-model="initSys" class="input"></el-input>
-                        <el-button type="primary" size="mini" class="button" @click="commit(10)">提交</el-button>
-                    </el-form-item>
                     <el-form-item label="系统初始开关(勿动)">
                         <el-input v-model="initSysC" class="input"></el-input>
                         <el-button type="primary" size="mini" class="button" @click="commit(12)">提交</el-button>
@@ -174,20 +166,10 @@
                 this.loading = false
                 this.addOrder = response.data.context
               })
-            }else if(this.type == 10){
-              textInfo({type:10}).then(response => {
-                this.loading = false
-                this.initSys = response.data.context
-              })
             }else if(this.type == 11){
               textInfo({type:11}).then(response => {
                 this.loading = false
                 this.initSysB = response.data.context
-              })
-            }else if(this.type == 13){
-              textInfo({type:13}).then(response => {
-                this.loading = false
-                this.initSysD = response.data.context
               })
             }else if(this.type == 12){
               textInfo({type:12}).then(response => {
@@ -224,17 +206,9 @@
               this.loading = false
               this.addOrder = response.data.context
             })
-            textInfo({type:10}).then(response => {
-                this.loading = false
-                this.initSys = response.data.context
-              })
               textInfo({type:11}).then(response => {
                 this.loading = false
                 this.initSysB = response.data.context
-              })
-              textInfo({type:13}).then(response => {
-                this.loading = false
-                this.initSysD = response.data.context
               })
               textInfo({type:12}).then(response => {
                 this.loading = false
@@ -270,12 +244,8 @@
           textStr = this.addOrder
         }else if(type == 0){
           textStr = this.ysStr
-        }else if(type == 10){
-          textStr = this.initSys
         }else if(type == 11){
           textStr = this.initSysB
-        }else if(type == 13){
-          textStr = this.initSysD
         }else if(type == 12){
           textStr = this.initSysC
         }
