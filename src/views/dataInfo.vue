@@ -247,7 +247,7 @@
             <el-statistic
               group-separator=","
               :value="jData.totalProfit"
-              title="总利润"
+              title="平台利润"
             >
             <template slot="prefix">
               <i class="el-icon-s-order" style="color: red"></i>
@@ -257,8 +257,18 @@
         </el-col>
         <el-col :span="zSpan" >
           <div>
-            <el-statistic title="成单利润"
-            :value="jData.completeProfit">
+            <el-statistic title="退款留存"
+            :value="jData.refundProfit">
+            <template slot="prefix">
+              <i class="el-icon-s-data" style="color: aquamarine"></i>
+            </template>
+            </el-statistic>
+          </div>
+        </el-col>
+        <el-col :span="zSpan" >
+          <div>
+            <el-statistic title="商家利润"
+            :value="jData.shopProfit">
             <template slot="prefix">
               <i class="el-icon-s-claim" style="color: coral"></i>
             </template>
@@ -267,24 +277,15 @@
         </el-col>
         <el-col :span="zSpan">
           <div>
-            <el-statistic title="打赏利润"
-            :value="jData.rewardProfit">
+            <el-statistic title="推广利润"
+            :value="jData.extendProfit">
             <template slot="prefix">
               <i class="el-icon-s-data" style="color: aqua"></i>
             </template>
             </el-statistic>
           </div>
         </el-col>
-        <el-col :span="zSpan" >
-          <div>
-            <el-statistic title="退款留存金额"
-            :value="jData.refundProfit">
-            <template slot="prefix">
-              <i class="el-icon-s-data" style="color: aquamarine"></i>
-            </template>
-            </el-statistic>
-          </div>
-        </el-col>
+        
         
       </el-row>
       <div class="clearfix" style="padding-bottom: 10px;">
