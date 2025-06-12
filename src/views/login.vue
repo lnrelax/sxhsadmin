@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">至享生活</h3>
+      <h3 class="title">尚品有约</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -47,7 +47,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <a href="https://beian.miit.gov.cn/" target="_blank">晋ICP备2024052181号-1</a>
+      <a href="https://beian.miit.gov.cn/" target="_blank">晋ICP备2025061598号-1</a>
     </div>
   </div>
 </template>
