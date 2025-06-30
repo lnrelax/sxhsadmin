@@ -22,8 +22,8 @@
       <el-table v-loading="loading" :data="orderList" height="580">
         <el-table-column label="推广团队ID" prop="extendId" width="180" align="center" />
         <el-table-column label="团队名称" prop="extendName" width="150" align="center" />
-        <el-table-column label="总推广用户" prop="totalUser" width="150" align="center" />
-        <el-table-column label="今日推广用户" prop="todayUser" width="150" align="center" />
+        <!-- <el-table-column label="总推广用户" prop="totalUser" width="150" align="center" />
+        <el-table-column label="今日推广用户" prop="todayUser" width="150" align="center" /> -->
         <!-- <el-table-column label="所属平台" prop="typeChn" width="120" align="center" /> -->
         <el-table-column label="分成比例" prop="divideNum" :formatter="divideNumFormat" width="100" align="center"/>
         <el-table-column label="可提现金额" prop="balance" width="160" align="center"/>
