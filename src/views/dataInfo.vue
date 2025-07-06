@@ -342,7 +342,7 @@
 
     <!--  底部  -->
     <div class="el-login-footer">
-      <a href="https://beian.miit.gov.cn/" target="_blank">晋ICP备2025061598号-1</a>
+      <a href="https://beian.miit.gov.cn/" target="_blank">晋ICP备2025062263号-1</a>
     </div>
 
   </div>

@@ -35,7 +35,7 @@ module.exports = {
     proxy: {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       [process.env.VUE_APP_BASE_API]: {
-        target: `https://www.cznndgs.com`,
+        target: `https://www.xychangyi.com`,
         changeOrigin: true,
       }
     },
