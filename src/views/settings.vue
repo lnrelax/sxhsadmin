@@ -20,14 +20,14 @@
                 <el-tab-pane label="系统设置" name="third">
 
                     <el-form label-position="left" label-width="180px" size="mini">
-                    <el-form-item label="系统初始变量(勿动)">
+                    <!-- <el-form-item label="系统初始变量(勿动)">
                         <el-input v-model="initSysB" class="input"></el-input>
                         <el-button type="primary" size="mini" class="button" @click="commit(11)">提交</el-button>
                     </el-form-item>
                     <el-form-item label="系统初始开关(勿动)">
                         <el-input v-model="initSysC" class="input"></el-input>
                         <el-button type="primary" size="mini" class="button" @click="commit(12)">提交</el-button>
-                    </el-form-item>
+                    </el-form-item> -->
                     <el-form-item label="客服电话">
                         <el-input v-model="phone" class="input"></el-input>
                         <el-button type="primary" size="mini" class="button" @click="commit(3)">提交</el-button>
