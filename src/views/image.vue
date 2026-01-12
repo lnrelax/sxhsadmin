@@ -43,7 +43,7 @@
           <el-form-item label="图片" :label-width="formLabelWidth" >
             <el-upload
               class="avatar-uploader"
-              action="https://www.lxhkj.com/zxtest/image/imageUpload"
+              action="https://www.bjqmyjk.com/zxtest/image/imageUpload"
               :show-file-list="false"
               :on-success="imageSuccess"
               :before-upload="imageUpload">
