@@ -100,13 +100,13 @@
         <el-table-column label="订单时间" prop="orderTime" width="160" align="center"/>
         <el-table-column label="订单总金额" prop="orderMoney" width="120" align="center"/>
         <el-table-column label="打赏金额" prop="rewardMoney" width="80" align="center"/>
-        <el-table-column label="打车费" prop="taxiMoney" width="80" align="center"/>
         <el-table-column label="优惠券" prop="couponMoney" width="80" align="center"/>
         <el-table-column label="理疗师利润" prop="artificerMoney" width="120" align="center"/>
         <el-table-column label="理疗师邀请利润" prop="inviteMoney" width="120" align="center"/>
         <el-table-column label="店铺利润" prop="agentMoney" width="80" align="center"/>
         <el-table-column label="平台利润" prop="orderProfit" width="80" align="center"/>
         <el-table-column label="推广利润" prop="extendMoney" width="80" align="center"/>
+        <el-table-column label="打车费" prop="taxiMoney" width="80" align="center"/>
         <el-table-column label="项目图片"  width="180" align="center">
           <template slot-scope="scope">
             <el-image 
